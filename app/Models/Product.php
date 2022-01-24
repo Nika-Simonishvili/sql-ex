@@ -14,6 +14,8 @@ class Product extends Model
 
     protected $fillable = ['maker', 'model', 'type'];
 
+    public $timestamps = false;
+
     public function pcs()
     {
         return $this->hasMany(Pc::class, 'model', 'code');
@@ -28,5 +30,5 @@ class Product extends Model
     {
         return $this->hasMany(Printer::class, 'model', 'code');
     }
-    
+
 }

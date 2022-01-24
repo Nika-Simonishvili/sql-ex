@@ -16,16 +16,34 @@ class PrinterSeeder extends Seeder
      */
     public function run()
     {
-        $product = Product::where('maker', 'C')->first();
+        $code = 0;
+        $maker = ['A', 'B', 'C', 'D', 'E'];
+        $color = ['n', 'y'];
+        $type = ['Laser', 'Matrix', 'Jet'];
+        $price =[150.0, 270.0, 290.0, 400.0];
 
-          // dump($product->model);
 
-        Printer::create([
-            'code' => 4,
-            'model' => $product->model,
-            'color' => 'n', 
-            'type' => 'matrix',
-            'price' => 150.0
-        ]); 
+
+        for($i = 0; $i < 6; $i++){
+            $keym = array_rand($maker);
+            $keycolor = array_rand($color);
+            $keytype = array_rand($type);
+            $keyprice = array_rand($price);
+
+
+
+
+            $maker_ = $maker[$keym];
+            $product = Product::where('maker', $maker_)->first();
+
+            Printer::create([
+                'code' => $code,
+                'model' => $product->model,
+                'color' => $color[$keycolor],
+                'type' => $type[$keytype],
+                'price' => $price[$keyprice]
+            ]);
+            $code++;
+        };
     }
 }

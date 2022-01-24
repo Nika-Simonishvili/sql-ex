@@ -10,4 +10,6 @@ class Printer extends Model
     use HasFactory;
 
     protected $filalble = ['code', 'model', 'color', 'type', 'price'];
+
+    public $timestamps = false;
 }

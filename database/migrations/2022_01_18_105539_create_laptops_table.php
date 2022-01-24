@@ -17,12 +17,11 @@ class CreateLaptopsTable extends Migration
             $table->integer('code')->unique();
             $table->integer('model');
             $table->foreign('model')->references('model')->on('products');
-            $table->tinyinteger('speed');
-            $table->tinyinteger('ram');
+            $table->integer('speed');
+            $table->integer('ram');
             $table->decimal('hd');
             $table->decimal('price')->nullable();
             $table->tinyinteger('screen');
-            $table->timestamps();
         });
     }
 

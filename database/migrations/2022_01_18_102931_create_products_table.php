@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->char('maker');
             $table->integer('model')->unique();
             $table->string('type');
-            $table->timestamps();
+
         });
     }
 

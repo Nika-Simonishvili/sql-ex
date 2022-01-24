@@ -10,4 +10,6 @@ class Pc extends Model
     use HasFactory;
 
     protected $fillable = ['code', 'model', 'speed', 'ram', 'hd', 'cd', 'price'];
+
+    public $timestamps = false;
 }
