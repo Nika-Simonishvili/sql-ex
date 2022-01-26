@@ -18,8 +18,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/pc', [PcsController::class, 'index']);
-
-Route::fallback(function(){
-    return view('error');
-});
