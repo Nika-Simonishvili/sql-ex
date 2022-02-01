@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import {Table, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap'
+import axios from "axios";
 
 class Qindex extends React.Component {
 
@@ -10,13 +11,16 @@ class Qindex extends React.Component {
             questions:[],
             newQuestionData:{
               title:"",
+              solution:""
             },
             editQuestionData:{
               id:"",
               title:"",
+              solution:""
             },
             newQuestionModal:false,
-            editQuestionModal:false
+            editQuestionModal:false,
+            solutions:[]
         }
     }
 
@@ -28,9 +32,20 @@ class Qindex extends React.Component {
         })
     }
 
+    getSolution(id) {
+        axios.get('http://127.0.0.1:8000/api/questions/' + id + '/solution').then((response) => {
+            this.setState({
+                solutions: response.data
+            })
+        })
+    }
+
+
     componentWillMount() {
         this.loadQuestion()
     }
+
+
 
     toggleNewQuestionModal(){
         this.setState({
@@ -45,35 +60,39 @@ class Qindex extends React.Component {
         })
     }
 
+
     addQuestion(){
         axios.post('http://127.0.0.1:8000/api/questions', this.state.newQuestionData).then((response) => {
             let {questions} = this.state
             this.loadQuestion()
 
             this.setState({questions,newQuestionModal:false,  newQuestionData:{
-                title:""
+                title:"",
+                solution:""
                 }})
         })
     }
 
     updateQuestion(){
-        let {id, title} = this.state.editQuestionData
+        let {id, title, solution} = this.state.editQuestionData
 
         axios.put('http://127.0.0.1:8000/api/questions/' + id, {
             title,
+            solution
         }).then((response) => {
             this.loadQuestion()
 
             this.setState({editQuestionModal:false, editQuestionData:{
                     id:"",
                     title:"",
+                    solution:""
                 }})
         })
     }
 
-    editQuestion(id, title){
+    editQuestion(id, title, solution){
         this.setState({
-            editQuestionData:{id, title},
+            editQuestionData:{id, title, solution},
             editQuestionModal: !this.state.editQuestionModal
         })
     }
@@ -84,20 +103,29 @@ class Qindex extends React.Component {
         })
     }
 
+
+
     render(){
+
         let questions = this.state.questions.map((question) => {
             return(
                 <tr key={question.id}>
                     <td>{question.id}</td>
                     <td>{question.title}</td>
+                    <td>{question.solution}</td>
                     <td>
                         <Button color="success" size="sm" className="mr-2"
-                                onClick={this.editQuestion.bind(this, question.id, question.title)}
+                                onClick={this.editQuestion.bind(this, question.id, question.title, question.solution)}
                         >Edit</Button>
 
                         <Button color="danger" size="sm"
                                 onClick={this.deleteQuestion.bind(this, question.id)}
                         >Delete</Button>
+
+                        <Button color="primary" size="sm"
+                                onClick={this.getSolution.bind(this, question.id)}
+                        >Run query</Button>
+                        hereeeeee
                     </td>
                 </tr>
             )
@@ -105,7 +133,7 @@ class Qindex extends React.Component {
 
         return (
             <div className="App container">
-                <h1>Question list</h1>
+                <h1>Question list </h1>
                 <Button color="primary" onClick={this.toggleNewQuestionModal.bind(this)}>Add question</Button>
                 <Modal isOpen={this.state.newQuestionModal} toggle={this.toggleNewQuestionModal.bind(this)}>
                     <ModalHeader toggle={this.toggleNewQuestionModal.bind(this)}>Add a new question</ModalHeader>
@@ -120,6 +148,18 @@ class Qindex extends React.Component {
                                         newQuestionData.title = e.target.value
                                         this.setState({newQuestionData} )
                                     }}
+                            >sda</Input>
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label for="solution">Solution</Label>
+                            <Input id="solution"
+                                   value={this.state.newQuestionData.solution}
+                                   onChange={(e) => {
+                                       let {newQuestionData} = this.state
+                                       newQuestionData.solution = e.target.value
+                                       this.setState({newQuestionData} )
+                                   }}
                             >sda</Input>
                         </FormGroup>
 
@@ -146,6 +186,18 @@ class Qindex extends React.Component {
                             >sda</Input>
                         </FormGroup>
 
+                        <FormGroup>
+                            <Label for="solution">Solution</Label>
+                            <Input id="solution"
+                                   value={this.state.editQuestionData.solution}
+                                   onChange={(e) => {
+                                       let {editQuestionData} = this.state
+                                       editQuestionData.solution = e.target.value
+                                       this.setState({editQuestionData} )
+                                   }}
+                            >sda</Input>
+                        </FormGroup>
+
                     </ModalBody>
                     <ModalFooter>
                         <Button color="primary" onClick={this.updateQuestion.bind(this)}>Update question</Button>{' '}
@@ -153,11 +205,13 @@ class Qindex extends React.Component {
                     </ModalFooter>
                 </Modal>
 
+
                 <Table>
                     <thead>
                     <tr>
                         <th>#</th>
                         <th>Question</th>
+                        <th>Solution</th>
                         <th>Actions</th>
                     </tr>
                     </thead>

@@ -12,4 +12,8 @@ class Pc extends Model
     protected $fillable = ['code', 'model', 'speed', 'ram', 'hd', 'cd', 'price'];
 
     public $timestamps = false;
+
+    public function maker(){
+        return $this->belongsTo(Product::class);
+    }
 }

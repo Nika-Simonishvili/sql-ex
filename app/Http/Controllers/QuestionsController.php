@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Question;
 
 class QuestionsController extends Controller
@@ -29,5 +30,16 @@ class QuestionsController extends Controller
         $question = Question::findOrFail($id);
         $question -> delete();
         return response(204);
+    }
+
+    public function solution($id){
+        $data = Question::where('id', $id)->get('solution');
+
+        $result1 = substr($data, 14);
+        $result2 = substr($result1, 0, -3);
+
+        $result = "App\Models\\" . $result2;
+
+        return eval("return $result");
     }
 }

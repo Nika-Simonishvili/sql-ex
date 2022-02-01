@@ -12,4 +12,8 @@ class Printer extends Model
     protected $filalble = ['code', 'model', 'color', 'type', 'price'];
 
     public $timestamps = false;
+
+    public function maker(){
+        return $this->belongsTo(Product::class);
+    }
 }

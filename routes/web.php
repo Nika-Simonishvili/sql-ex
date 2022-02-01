@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Pc;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PcsController;
 
@@ -17,4 +18,8 @@ use App\Http\Controllers\PcsController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('questions/{id}/solution', [\App\Http\Controllers\QuestionsController::class, 'solution']);
+
+Route::resource('/pcs', PcsController::class);
 

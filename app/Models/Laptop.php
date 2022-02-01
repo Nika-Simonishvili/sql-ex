@@ -12,4 +12,8 @@ class Laptop extends Model
     protected $fillable = ['code', 'model', 'speed', 'ram', 'hd', 'price', 'speed'];
 
     public $timestamps = false;
+
+    public function maker(){
+        return $this->belongsTo(Product::class);
+    }
 }

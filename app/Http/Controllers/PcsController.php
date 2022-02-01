@@ -6,6 +6,7 @@ use App\Models\Pc;
 use App\Http\Requests\StorePcRequest;
 use App\Http\Requests\UpdatePcRequest;
 use App\Models\Product;
+use App\Models\Question;
 
 class PcsController extends Controller
 {
@@ -16,17 +17,10 @@ class PcsController extends Controller
      */
     public function index()
     {
-        $product = Product::where('model', 1223)->get();
+        $query =  Question::where('id', 5)->get('solution');
 
-        // $pc = Pc::create([
-        //     'code' => '1',
-        //     'model' => $product->model,
-        //     'speed' => 20,
-        //     'ram' => 32,
-        //     'hd' => 5.0,
-        //     'cd' => '12x',
-        //     'price' => 2000.0
-        // ]);
+        return  $query;
+//        return  eval("return $query;");
     }
 
     /**
