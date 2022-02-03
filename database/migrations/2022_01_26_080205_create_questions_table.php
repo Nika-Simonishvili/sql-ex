@@ -17,6 +17,7 @@ class CreateQuestionsTable extends Migration
             $table->bigIncrements('id');
             $table->longText('title');
             $table->longText('solution')->nullable();
+            $table->longText('data')->default('');
             $table->timestamps();
         });
     }

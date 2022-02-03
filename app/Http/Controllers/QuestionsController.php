@@ -17,12 +17,32 @@ class QuestionsController extends Controller
     }
 
     public function store(Request $request) {
-        return Question::create($request->all());
+
+        $solution = $request->input('solution');
+        $result = "App\Models\\" . $solution;
+
+        $data = eval("return $result");
+
+        return Question::create([
+            'title' => $request->input('title'),
+            'solution' => $request->input('solution'),
+            'data' => $data
+        ]);
     }
 
     public function update(Request $request, $id) {
         $question = Question::findOrFail($id);
-        $question->update($request->all());
+
+        $solution = $request->input('solution');
+        $result = "App\Models\\" . $solution;
+
+        $data = eval("return $result");
+
+        $question->update([
+            'title' => $request->input('title'),
+            'solution' => $request->input('solution'),
+            'data' => $data
+        ]);
         return $question;
     }
 
@@ -32,14 +52,4 @@ class QuestionsController extends Controller
         return response(204);
     }
 
-    public function solution($id){
-        $data = Question::where('id', $id)->get('solution');
-
-        $result1 = substr($data, 14);
-        $result2 = substr($result1, 0, -3);
-
-        $result = "App\Models\\" . $result2;
-
-        return eval("return $result");
-    }
 }

@@ -11,16 +11,17 @@ class Qindex extends React.Component {
             questions:[],
             newQuestionData:{
               title:"",
-              solution:""
+              solution:"",
+              data:""
             },
             editQuestionData:{
               id:"",
               title:"",
-              solution:""
+              solution:"",
+              data:""
             },
             newQuestionModal:false,
-            editQuestionModal:false,
-            solutions:[]
+            editQuestionModal:false
         }
     }
 
@@ -28,14 +29,6 @@ class Qindex extends React.Component {
         axios.get('http://127.0.0.1:8000/api/questions').then((response) => {
             this.setState({
                 questions: response.data
-            })
-        })
-    }
-
-    getSolution(id) {
-        axios.get('http://127.0.0.1:8000/api/questions/' + id + '/solution').then((response) => {
-            this.setState({
-                solutions: response.data
             })
         })
     }
@@ -68,7 +61,8 @@ class Qindex extends React.Component {
 
             this.setState({questions,newQuestionModal:false,  newQuestionData:{
                 title:"",
-                solution:""
+                solution:"",
+                data:""
                 }})
         })
     }
@@ -113,6 +107,7 @@ class Qindex extends React.Component {
                     <td>{question.id}</td>
                     <td>{question.title}</td>
                     <td>{question.solution}</td>
+                    <td>{question.data}</td>
                     <td>
                         <Button color="success" size="sm" className="mr-2"
                                 onClick={this.editQuestion.bind(this, question.id, question.title, question.solution)}
@@ -121,11 +116,6 @@ class Qindex extends React.Component {
                         <Button color="danger" size="sm"
                                 onClick={this.deleteQuestion.bind(this, question.id)}
                         >Delete</Button>
-
-                        <Button color="primary" size="sm"
-                                onClick={this.getSolution.bind(this, question.id)}
-                        >Run query</Button>
-                        hereeeeee
                     </td>
                 </tr>
             )
@@ -212,6 +202,7 @@ class Qindex extends React.Component {
                         <th>#</th>
                         <th>Question</th>
                         <th>Solution</th>
+                        <th>Data</th>
                         <th>Actions</th>
                     </tr>
                     </thead>

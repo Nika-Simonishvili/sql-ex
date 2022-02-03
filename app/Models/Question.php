@@ -11,5 +11,5 @@ class Question extends Model
 
     protected $hidden = ['timestamps'];
 
-    protected $fillable = ['title', 'solution'];
+    protected $fillable = ['title', 'solution', 'data'];
 }

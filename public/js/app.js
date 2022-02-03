@@ -5422,16 +5422,17 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
       questions: [],
       newQuestionData: {
         title: "",
-        solution: ""
+        solution: "",
+        data: ""
       },
       editQuestionData: {
         id: "",
         title: "",
-        solution: ""
+        solution: "",
+        data: ""
       },
       newQuestionModal: false,
-      editQuestionModal: false,
-      solutions: []
+      editQuestionModal: false
     };
     return _this;
   }
@@ -5444,17 +5445,6 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
       axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions').then(function (response) {
         _this2.setState({
           questions: response.data
-        });
-      });
-    }
-  }, {
-    key: "getSolution",
-    value: function getSolution(id) {
-      var _this3 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions/' + id + '/solution').then(function (response) {
-        _this3.setState({
-          solutions: response.data
         });
       });
     }
@@ -5480,19 +5470,20 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "addQuestion",
     value: function addQuestion() {
-      var _this4 = this;
+      var _this3 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://127.0.0.1:8000/api/questions', this.state.newQuestionData).then(function (response) {
-        var questions = _this4.state.questions;
+        var questions = _this3.state.questions;
 
-        _this4.loadQuestion();
+        _this3.loadQuestion();
 
-        _this4.setState({
+        _this3.setState({
           questions: questions,
           newQuestionModal: false,
           newQuestionData: {
             title: "",
-            solution: ""
+            solution: "",
+            data: ""
           }
         });
       });
@@ -5500,7 +5491,7 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateQuestion",
     value: function updateQuestion() {
-      var _this5 = this;
+      var _this4 = this;
 
       var _this$state$editQuest = this.state.editQuestionData,
           id = _this$state$editQuest.id,
@@ -5510,9 +5501,9 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
         title: title,
         solution: solution
       }).then(function (response) {
-        _this5.loadQuestion();
+        _this4.loadQuestion();
 
-        _this5.setState({
+        _this4.setState({
           editQuestionModal: false,
           editQuestionData: {
             id: "",
@@ -5537,16 +5528,16 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteQuestion",
     value: function deleteQuestion(id) {
-      var _this6 = this;
+      var _this5 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default()["delete"]('http://127.0.0.1:8000/api/questions/' + id).then(function (response) {
-        _this6.loadQuestion();
+        _this5.loadQuestion();
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this7 = this;
+      var _this6 = this;
 
       var questions = this.state.questions.map(function (question) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
@@ -5556,24 +5547,21 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
             children: question.title
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
             children: question.solution
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+            children: question.data
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
               color: "success",
               size: "sm",
               className: "mr-2",
-              onClick: _this7.editQuestion.bind(_this7, question.id, question.title, question.solution),
+              onClick: _this6.editQuestion.bind(_this6, question.id, question.title, question.solution),
               children: "Edit"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
               color: "danger",
               size: "sm",
-              onClick: _this7.deleteQuestion.bind(_this7, question.id),
+              onClick: _this6.deleteQuestion.bind(_this6, question.id),
               children: "Delete"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
-              color: "primary",
-              size: "sm",
-              onClick: _this7.getSolution.bind(_this7, question.id),
-              children: "Run query"
-            }), "hereeeeee"]
+            })]
           })]
         }, question.id);
       });
@@ -5600,10 +5588,10 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 id: "title",
                 value: this.state.newQuestionData.title,
                 onChange: function onChange(e) {
-                  var newQuestionData = _this7.state.newQuestionData;
+                  var newQuestionData = _this6.state.newQuestionData;
                   newQuestionData.title = e.target.value;
 
-                  _this7.setState({
+                  _this6.setState({
                     newQuestionData: newQuestionData
                   });
                 },
@@ -5617,10 +5605,10 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 id: "solution",
                 value: this.state.newQuestionData.solution,
                 onChange: function onChange(e) {
-                  var newQuestionData = _this7.state.newQuestionData;
+                  var newQuestionData = _this6.state.newQuestionData;
                   newQuestionData.solution = e.target.value;
 
-                  _this7.setState({
+                  _this6.setState({
                     newQuestionData: newQuestionData
                   });
                 },
@@ -5653,10 +5641,10 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 id: "title",
                 value: this.state.editQuestionData.title,
                 onChange: function onChange(e) {
-                  var editQuestionData = _this7.state.editQuestionData;
+                  var editQuestionData = _this6.state.editQuestionData;
                   editQuestionData.title = e.target.value;
 
-                  _this7.setState({
+                  _this6.setState({
                     editQuestionData: editQuestionData
                   });
                 },
@@ -5670,10 +5658,10 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 id: "solution",
                 value: this.state.editQuestionData.solution,
                 onChange: function onChange(e) {
-                  var editQuestionData = _this7.state.editQuestionData;
+                  var editQuestionData = _this6.state.editQuestionData;
                   editQuestionData.solution = e.target.value;
 
-                  _this7.setState({
+                  _this6.setState({
                     editQuestionData: editQuestionData
                   });
                 },
@@ -5700,6 +5688,8 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 children: "Question"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                 children: "Solution"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                children: "Data"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                 children: "Actions"
               })]
