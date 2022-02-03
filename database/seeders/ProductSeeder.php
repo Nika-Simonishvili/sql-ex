@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 
 class ProductSeeder extends Seeder
@@ -14,21 +15,32 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $makers = ['A', 'B', 'C', 'D', 'E'];
-        $models = [1232, 1233, 1276, 1298, 1401, 1408, 1752, 1121, 1750, 1321, 1288, 1433, 1260, 1434, 2112, 2113];
-        $types = ['PC', 'Laptop', 'Printer'];
+        $array = ['A',	1232,	'PC',
+                'A',	1233,	'PC',
+                'A',	1276,	'Printer',
+                'A',	1298,	'Laptop',
+                'A',	1401,	'Printer',
+                'A',	1408,	'Printer',
+                'A',	1752,	'Laptop',
+                'B',	1121,	'PC',
+                'B',	1750,	'Laptop',
+                'C',	1321,	'Laptop',
+                'D',	1288,	'Printer',
+                'D',	1433,	'Printer',
+                'E',	1260,	'PC',
+                'E',	1434,	'Printer',
+                'E',	2112,	'PC',
+                'E',	2113,	'PC'
+        ];
 
-        for ($i = 0; $i < count($models); $i++) {
-            $keymaker = array_rand($makers);
-            $keytypes = array_rand($types);
-
-
-            Product::create([
-                'maker' => $makers[$keymaker],
-                'model' => $models[$i],
-                'type' => $types[$keytypes]
-            ]);
-
+        for($i=0; $i<count($array);$i++){
+            if(($i%3)==0){
+                DB::table('products')->insert([
+                    'maker' =>$array[$i],
+                    'model' => $array[$i+1],
+                    'type' => $array[$i+2]
+                ]);
+            }
         }
     }
 }

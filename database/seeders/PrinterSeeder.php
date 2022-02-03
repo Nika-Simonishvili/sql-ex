@@ -3,9 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Printer;
-use App\models\Product;
-
 
 class PrinterSeeder extends Seeder
 {
@@ -16,34 +15,25 @@ class PrinterSeeder extends Seeder
      */
     public function run()
     {
-        $code = 0;
-        $maker = ['A', 'B', 'C', 'D', 'E'];
-        $color = ['n', 'y'];
-        $type = ['Laser', 'Matrix', 'Jet'];
-        $price =[150.0, 270.0, 290.0, 400.0];
+        $array = [
+            1,	1276,	'n',	'Laser',	400.0000,
+            2,	1433,	'y',	'Jet',	    270.0000,
+            3,	1434,	'y',	'Jet',	    290.0000,
+            4,	1401,	'n',	'Matrix',	150.0000,
+            5,	1408,	'n',	'Matrix',	270.0000,
+            6,	1288,	'n',	'Laser',	400.0000
+        ];
 
-
-
-        for($i = 0; $i < 6; $i++){
-            $keym = array_rand($maker);
-            $keycolor = array_rand($color);
-            $keytype = array_rand($type);
-            $keyprice = array_rand($price);
-
-
-
-
-            $maker_ = $maker[$keym];
-            $product = Product::where('maker', $maker_)->first();
-
-            Printer::create([
-                'code' => $code,
-                'model' => $product->model,
-                'color' => $color[$keycolor],
-                'type' => $type[$keytype],
-                'price' => $price[$keyprice]
-            ]);
-            $code++;
-        };
+        for($i=0; $i<count($array); $i++){
+            if(($i % 5)==0){
+                DB::table('printers')->insert([
+                    'code' =>$array[$i],
+                    'model' => $array[$i+1],
+                    'color' => $array[$i+2],
+                    'type' => $array[$i+3],
+                    'price' => $array[$i+4]
+                ]);
+            }
+        }
     }
 }

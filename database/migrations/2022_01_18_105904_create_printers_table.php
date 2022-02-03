@@ -20,7 +20,6 @@ class CreatePrintersTable extends Migration
             $table->char('color');
             $table->string('type');
             $table->decimal('price')->nullable();
-            $table->timestamps();
         });
     }
 

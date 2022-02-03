@@ -3,8 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 use App\Models\Pc;
-use App\Models\Product;
 
 class PcSeeder extends Seeder
 {
@@ -15,41 +15,32 @@ class PcSeeder extends Seeder
      */
     public function run()
     {
-        $code = 0;
-        $maker = ['A', 'B', 'C', 'D', 'E'];
-        $speed = [500, 750, 600, 900, 800, 450];
-        $ram = [32, 64, 128];
-        $hd = [5.0, 10.0, 20.0, 40.0, 14.0, 8.0];
-        $cd = ['12x', '24x', '40x', '50x'];
-        $price =[350.0, 400.0, 600.0, 850.0, 950.0, 970.0];
+            $array = [1,	1232,	500,	64,	5.0,	'12x',	600.0000,
+                        10,	1260,	500,	32,	10.0,	'12x',	350.0000,
+                    11,	1233,	900,	128,	40.0,	'40x',	980.0000,
+                    12,	1233,	800,	128,	20.0,	'50x',	970.0000,
+                    2,	1121,	750,	128,	14.0,	'40x',	850.0000,
+                    3,	1233,	500,	64,	    5.0,	'12x',	600.0000,
+                    4,	1121,	600,	128,	14.0,	'40x',	850.0000,
+                    5,	1121,	600,	128,	8.0,	'40x',	850.0000,
+                    6,	1233,	750,	128,	20.0,	'50x',	950.0000,
+                    7,	1232,	500,	32,	    10.0,	'12x',	400.0000,
+                    8,	1232,	450,	64,	    8.0,	'24x',	350.0000,
+                    9,	1232,	450,	32,	    10.0,	'24x',	350.0000];
 
 
-
-        for($i = 0; $i < 12; $i++){
-            $keym = array_rand($maker);
-            $keysp = array_rand($speed);
-            $keyr = array_rand($ram);
-            $keyh = array_rand($hd);
-            $keysc = array_rand($cd);
-            $keyp = array_rand($price);
-
-
-
-
-            $maker_ = $maker[$keym];
-            $product = Product::where('maker', $maker_)->first();
-
-            Pc::create([
-                'code' => $code,
-                'model' => $product->model,
-                'speed' => $speed[$keysp],
-                'ram' => $ram[$keyr],
-                'hd' => $hd[$keyh],
-                'price' => $price[$keyp],
-                'cd' => $cd[$keysc]
-            ]);
-            $code++;
-        };
-
+        for($i=0; $i<count($array); $i++){
+            if(($i % 7)==0){
+                DB::table('pcs')->insert([
+                    'code' =>$array[$i],
+                    'model' => $array[$i+1],
+                    'speed' => $array[$i+2],
+                    'ram' => $array[$i+3],
+                    'hd' => $array[$i+4],
+                    'cd' => $array[$i+5],
+                    'price' => $array[$i+6]
+                ]);
+            }
+        }
     }
 }
