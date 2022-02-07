@@ -5431,19 +5431,58 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
         solution: "",
         data: ""
       },
+      solutionData: {},
       newQuestionModal: false,
-      editQuestionModal: false
+      editQuestionModal: false,
+      isOpen: false,
+      error: null,
+      response: {}
     };
     return _this;
   }
 
   _createClass(Qindex, [{
-    key: "loadQuestion",
-    value: function loadQuestion() {
+    key: "componentDidMount",
+    value: function componentDidMount() {
       var _this2 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions').then(function (response) {
+        return response.data;
+      }).then(function (result) {
         _this2.setState({
+          questions: result
+        });
+      }, function (error) {
+        _this2.setState({
+          error: error
+        });
+      });
+    }
+  }, {
+    key: "toggleModal",
+    value: function toggleModal(questionId) {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions' + '/' + questionId).then(function (response) {
+        _this3.setState({
+          solutionData: response.data
+        });
+      }, function (error) {
+        _this3.setState({
+          error: error
+        });
+      });
+      this.setState({
+        isOpen: !this.state.isOpen
+      });
+    }
+  }, {
+    key: "loadQuestion",
+    value: function loadQuestion() {
+      var _this4 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions').then(function (response) {
+        _this4.setState({
           questions: response.data
         });
       });
@@ -5470,14 +5509,14 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "addQuestion",
     value: function addQuestion() {
-      var _this3 = this;
+      var _this5 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://127.0.0.1:8000/api/questions', this.state.newQuestionData).then(function (response) {
-        var questions = _this3.state.questions;
+        var questions = _this5.state.questions;
 
-        _this3.loadQuestion();
+        _this5.loadQuestion();
 
-        _this3.setState({
+        _this5.setState({
           questions: questions,
           newQuestionModal: false,
           newQuestionData: {
@@ -5491,7 +5530,7 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "updateQuestion",
     value: function updateQuestion() {
-      var _this4 = this;
+      var _this6 = this;
 
       var _this$state$editQuest = this.state.editQuestionData,
           id = _this$state$editQuest.id,
@@ -5501,9 +5540,9 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
         title: title,
         solution: solution
       }).then(function (response) {
-        _this4.loadQuestion();
+        _this6.loadQuestion();
 
-        _this4.setState({
+        _this6.setState({
           editQuestionModal: false,
           editQuestionData: {
             id: "",
@@ -5528,16 +5567,16 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "deleteQuestion",
     value: function deleteQuestion(id) {
-      var _this5 = this;
+      var _this7 = this;
 
       axios__WEBPACK_IMPORTED_MODULE_2___default()["delete"]('http://127.0.0.1:8000/api/questions/' + id).then(function (response) {
-        _this5.loadQuestion();
+        _this7.loadQuestion();
       });
     }
   }, {
     key: "render",
     value: function render() {
-      var _this6 = this;
+      var _this8 = this;
 
       var questions = this.state.questions.map(function (question) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
@@ -5547,20 +5586,24 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
             children: question.title
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
             children: question.solution
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
-            children: question.data
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("td", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
               color: "success",
               size: "sm",
               className: "mr-2",
-              onClick: _this6.editQuestion.bind(_this6, question.id, question.title, question.solution),
+              onClick: _this8.editQuestion.bind(_this8, question.id, question.title, question.solution),
               children: "Edit"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
               color: "danger",
               size: "sm",
-              onClick: _this6.deleteQuestion.bind(_this6, question.id),
+              onClick: _this8.deleteQuestion.bind(_this8, question.id),
               children: "Delete"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
+              color: "primary",
+              onClick: function onClick() {
+                return _this8.toggleModal(question.id);
+              },
+              children: "Run query"
             })]
           })]
         }, question.id);
@@ -5588,10 +5631,10 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 id: "title",
                 value: this.state.newQuestionData.title,
                 onChange: function onChange(e) {
-                  var newQuestionData = _this6.state.newQuestionData;
+                  var newQuestionData = _this8.state.newQuestionData;
                   newQuestionData.title = e.target.value;
 
-                  _this6.setState({
+                  _this8.setState({
                     newQuestionData: newQuestionData
                   });
                 },
@@ -5605,10 +5648,10 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 id: "solution",
                 value: this.state.newQuestionData.solution,
                 onChange: function onChange(e) {
-                  var newQuestionData = _this6.state.newQuestionData;
+                  var newQuestionData = _this8.state.newQuestionData;
                   newQuestionData.solution = e.target.value;
 
-                  _this6.setState({
+                  _this8.setState({
                     newQuestionData: newQuestionData
                   });
                 },
@@ -5641,10 +5684,10 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 id: "title",
                 value: this.state.editQuestionData.title,
                 onChange: function onChange(e) {
-                  var editQuestionData = _this6.state.editQuestionData;
+                  var editQuestionData = _this8.state.editQuestionData;
                   editQuestionData.title = e.target.value;
 
-                  _this6.setState({
+                  _this8.setState({
                     editQuestionData: editQuestionData
                   });
                 },
@@ -5658,10 +5701,10 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 id: "solution",
                 value: this.state.editQuestionData.solution,
                 onChange: function onChange(e) {
-                  var editQuestionData = _this6.state.editQuestionData;
+                  var editQuestionData = _this8.state.editQuestionData;
                   editQuestionData.solution = e.target.value;
 
-                  _this6.setState({
+                  _this8.setState({
                     editQuestionData: editQuestionData
                   });
                 },
@@ -5679,6 +5722,31 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
               children: "Cancel"
             })]
           })]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Modal, {
+          isOpen: this.state.isOpen,
+          toggle: this.toggleModal.bind(this.id),
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.ModalHeader, {
+            toggle: this.toggleModal.bind(this),
+            className: "btn-primary",
+            children: "Query result"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Table, {
+            className: "table",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("tbody", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
+                  children: "data:"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("td", {
+                  children: this.state.solutionData.data
+                })]
+              })
+            })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.ModalFooter, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
+              color: "secondary",
+              onClick: this.toggleModal.bind(this),
+              children: "Cancel"
+            })
+          })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Table, {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("thead", {
             children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("tr", {
@@ -5688,8 +5756,6 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
                 children: "Question"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                 children: "Solution"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
-                children: "Data"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("th", {
                 children: "Actions"
               })]

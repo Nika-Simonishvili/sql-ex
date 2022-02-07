@@ -20,9 +20,42 @@ class Qindex extends React.Component {
               solution:"",
               data:""
             },
+            solutionData: {},
             newQuestionModal:false,
-            editQuestionModal:false
+            editQuestionModal:false,
+            isOpen:false,
+            error: null,
+            response: {}
         }
+    }
+
+    componentDidMount(){
+        axios.get('http://127.0.0.1:8000/api/questions').then(response => response.data).then(
+            (result)=>{
+                this.setState({
+                    questions:result
+                });
+            },
+            (error)=>{
+                this.setState({error});
+            }
+        )
+    }
+
+    toggleModal(questionId) {
+
+        axios.get('http://127.0.0.1:8000/api/questions' + '/' + questionId).then((response )=> {
+                this.setState({
+                    solutionData: response.data
+                });
+            },
+            (error) => {
+                this.setState({ error });
+            }
+        )
+        this.setState({
+            isOpen: !this.state.isOpen
+        });
     }
 
     loadQuestion() {
@@ -100,14 +133,12 @@ class Qindex extends React.Component {
 
 
     render(){
-
         let questions = this.state.questions.map((question) => {
             return(
                 <tr key={question.id}>
                     <td>{question.id}</td>
                     <td>{question.title}</td>
                     <td>{question.solution}</td>
-                    <td>{question.data}</td>
                     <td>
                         <Button color="success" size="sm" className="mr-2"
                                 onClick={this.editQuestion.bind(this, question.id, question.title, question.solution)}
@@ -116,6 +147,7 @@ class Qindex extends React.Component {
                         <Button color="danger" size="sm"
                                 onClick={this.deleteQuestion.bind(this, question.id)}
                         >Delete</Button>
+                        <Button color='primary' onClick={()=>this.toggleModal(question.id)} >Run query</Button>
                     </td>
                 </tr>
             )
@@ -195,6 +227,20 @@ class Qindex extends React.Component {
                     </ModalFooter>
                 </Modal>
 
+                <Modal isOpen={this.state.isOpen} toggle={this.toggleModal.bind(this.id)}>
+                    <ModalHeader toggle={this.toggleModal.bind(this)}  className="btn-primary">Query result</ModalHeader>
+                    <Table className="table">
+                        <tbody>
+                            <tr>
+                                <th>data:</th><td>{this.state.solutionData.data}</td>
+                            </tr>
+                        </tbody>
+                    </Table>
+                    <ModalFooter>
+                        <Button color="secondary" onClick={this.toggleModal.bind(this)}>Cancel</Button>
+                    </ModalFooter>
+                </Modal>
+
 
                 <Table>
                     <thead>
@@ -202,7 +248,6 @@ class Qindex extends React.Component {
                         <th>#</th>
                         <th>Question</th>
                         <th>Solution</th>
-                        <th>Data</th>
                         <th>Actions</th>
                     </tr>
                     </thead>
