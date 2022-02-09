@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import {Table, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap'
 import axios from "axios";
 
-class Qindex extends React.Component {
+class Index extends React.Component {
 
     constructor(){
         super()
@@ -140,13 +140,14 @@ class Qindex extends React.Component {
                     <td>{question.title}</td>
                     <td>{question.solution}</td>
                     <td>
-                        <Button color="success" size="sm" className="mr-2"
+                        <Button color="success" size="sm" className="mx-auto"
                                 onClick={this.editQuestion.bind(this, question.id, question.title, question.solution)}
                         >Edit</Button>
-
-                        <Button color="danger" size="sm"
+                        &nbsp;&nbsp;
+                        <Button color="danger" size="sm" className="mx-auto"
                                 onClick={this.deleteQuestion.bind(this, question.id)}
                         >Delete</Button>
+
                         <Button color='primary' onClick={()=>this.toggleModal(question.id)} >Run query</Button>
                     </td>
                 </tr>
@@ -261,8 +262,8 @@ class Qindex extends React.Component {
     }
 }
 
-export default Qindex;
+export default Index;
 
-if (document.getElementById('qindex')) {
-    ReactDOM.render(<Qindex />, document.getElementById('qindex'));
+if (document.getElementById('index')) {
+    ReactDOM.render(<Index />, document.getElementById('index'));
 }

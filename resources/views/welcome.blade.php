@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div id="qindex">
+    <div id="index">
 
     </div>
 </body>

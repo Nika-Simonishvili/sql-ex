@@ -17,10 +17,7 @@ class PcsController extends Controller
      */
     public function index()
     {
-        $query =  Question::where('id', 5)->get('solution');
-
-        return  $query;
-//        return  eval("return $query;");
+       //
     }
 
     /**

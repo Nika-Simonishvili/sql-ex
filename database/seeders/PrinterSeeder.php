@@ -15,25 +15,24 @@ class PrinterSeeder extends Seeder
      */
     public function run()
     {
-        $array = [
-            1,	1276,	'n',	'Laser',	400.0000,
-            2,	1433,	'y',	'Jet',	    270.0000,
-            3,	1434,	'y',	'Jet',	    290.0000,
-            4,	1401,	'n',	'Matrix',	150.0000,
-            5,	1408,	'n',	'Matrix',	270.0000,
-            6,	1288,	'n',	'Laser',	400.0000
-        ];
+        $array = array
+        (
+                 array(1,	1276,	'n',	'Laser',	400.0000),
+                 array(2,	1433,	'y',	'Jet',	    270.0000),
+                 array(3,	1434,	'y',	'Jet',	    290.0000),
+                 array(4,	1401,	'n',	'Matrix',	150.0000),
+                 array(5,	1408,	'n',	'Matrix',	270.0000),
+                 array(6,	1288,	'n',	'Laser',	400.0000)
+        );
 
-        for($i=0; $i<count($array); $i++){
-            if(($i % 5)==0){
-                DB::table('printers')->insert([
-                    'code' =>$array[$i],
-                    'model' => $array[$i+1],
-                    'color' => $array[$i+2],
-                    'type' => $array[$i+3],
-                    'price' => $array[$i+4]
-                ]);
-            }
+        foreach ($array as $key) {
+            DB::table('printers')->insert([
+                'code' =>$key[0],
+                'model' => $key[1],
+                'color' => $key[2],
+                'type' => $key[3],
+                'price' => $key[4]
+            ]);
         }
     }
 }

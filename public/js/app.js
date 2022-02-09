@@ -5272,7 +5272,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 __webpack_require__(/*! ./components/Example */ "./resources/js/components/Example.js");
 
-__webpack_require__(/*! ./components/Qindex */ "./resources/js/components/Qindex.js");
+__webpack_require__(/*! ./components/index */ "./resources/js/components/index.js");
 
 /***/ }),
 
@@ -5361,10 +5361,10 @@ if (document.getElementById('example')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Qindex.js":
-/*!*******************************************!*\
-  !*** ./resources/js/components/Qindex.js ***!
-  \*******************************************/
+/***/ "./resources/js/components/index.js":
+/*!******************************************!*\
+  !*** ./resources/js/components/index.js ***!
+  \******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5407,15 +5407,15 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Qindex = /*#__PURE__*/function (_React$Component) {
-  _inherits(Qindex, _React$Component);
+var Index = /*#__PURE__*/function (_React$Component) {
+  _inherits(Index, _React$Component);
 
-  var _super = _createSuper(Qindex);
+  var _super = _createSuper(Index);
 
-  function Qindex() {
+  function Index() {
     var _this;
 
-    _classCallCheck(this, Qindex);
+    _classCallCheck(this, Index);
 
     _this = _super.call(this);
     _this.state = {
@@ -5441,7 +5441,7 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
     return _this;
   }
 
-  _createClass(Qindex, [{
+  _createClass(Index, [{
     key: "componentDidMount",
     value: function componentDidMount() {
       var _this2 = this;
@@ -5590,12 +5590,13 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
               color: "success",
               size: "sm",
-              className: "mr-2",
+              className: "mx-auto",
               onClick: _this8.editQuestion.bind(_this8, question.id, question.title, question.solution),
               children: "Edit"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
+            }), "\xA0\xA0", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
               color: "danger",
               size: "sm",
+              className: "mx-auto",
               onClick: _this8.deleteQuestion.bind(_this8, question.id),
               children: "Delete"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_4__.Button, {
@@ -5768,13 +5769,13 @@ var Qindex = /*#__PURE__*/function (_React$Component) {
     }
   }]);
 
-  return Qindex;
+  return Index;
 }(react__WEBPACK_IMPORTED_MODULE_0__.Component);
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Qindex);
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Index);
 
-if (document.getElementById('qindex')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Qindex, {}), document.getElementById('qindex'));
+if (document.getElementById('index')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Index, {}), document.getElementById('index'));
 }
 
 /***/ }),

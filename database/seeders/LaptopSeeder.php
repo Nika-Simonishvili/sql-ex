@@ -15,30 +15,26 @@ class LaptopSeeder extends Seeder
      */
     public function run()
     {
-        $array = [
-            1,	1298,	350,	32,	4.0,	700.0000,	11,
-            2,	1321,	500,	64,	8.0,	970.0000,	12,
-            3,	1750,	750,	128,12.0,	1200.0000,	14,
-            4,	1298,	600,	64,	10.0,	1050.0000,	15,
-            5,	1752,	750,	128,10.0,	1150.0000,	14,
-            6,	1298,	450,	64,	10.0,	950.0000,	12
-        ];
+        $array = array
+        (
+                array(1,	1298,	350,	32,	4.0,	700.0000,	11),
+                array(2,	1321,	500,	64,	8.0,	970.0000,	12),
+                array(3,	1750,	750,	128,12.0,	1200.0000,	14),
+                array(4,	1298,	600,	64,	10.0,	1050.0000,	15),
+                array(5,	1752,	750,	128,10.0,	1150.0000,	14),
+                array(6,	1298,	450,	64,	10.0,	950.0000,	12)
+        );
 
-        for($i=0; $i<count($array); $i++){
-            if(($i % 7)==0){
-                DB::table('laptops')->insert([
-                    'code' =>$array[$i],
-                    'model' => $array[$i+1],
-                    'speed' => $array[$i+2],
-                    'ram' => $array[$i+3],
-                    'hd' => $array[$i+4],
-                    'price' => $array[$i+5],
-                    'screen' => $array[$i+6]
-                ]);
-            }
+        foreach ($array as $key) {
+            DB::table('laptops')->insert([
+                'code' =>$key[0],
+                'model' => $key[1],
+                'speed' => $key[2],
+                'ram' => $key[3],
+                'hd' => $key[4],
+                'price' => $key[5],
+                'screen' => $key[6]
+            ]);
         }
-
-
-
     }
 }
