@@ -28,7 +28,7 @@ class QuestionsController extends Controller
 
         return Question::create([
             'title' => $request->input('title'),
-            'solution' => $request->input('solution'),
+            'solution' => $solution,
             'data' => $data
         ]);
     }
@@ -44,7 +44,7 @@ class QuestionsController extends Controller
 
         $question->update([
             'title' => $request->input('title'),
-            'solution' => $request->input('solution'),
+            'solution' => $solution,
             'data' => $data
         ]);
         return $question;

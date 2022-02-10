@@ -16,9 +16,9 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
-        //$this->call(ProductSeeder::class);
-        //$this->call(PcSeeder::class);
+        $this->call(ProductSeeder::class);
+        $this->call(PcSeeder::class);
         $this->call(PrinterSeeder::class);
-        //$this->call(LaptopSeeder::class);
+        $this->call(LaptopSeeder::class);
     }
 }

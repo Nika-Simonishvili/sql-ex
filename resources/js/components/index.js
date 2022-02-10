@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import {Table, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap'
 import axios from "axios";
+import NewQuestionModal from "./NewQuestionModal";
 
 class Index extends React.Component {
 
-    constructor(){
-        super()
+    constructor(props){
+        super(props)
         this.state = {
             questions:[],
             newQuestionData:{
@@ -25,7 +26,6 @@ class Index extends React.Component {
             editQuestionModal:false,
             isOpen:false,
             error: null,
-            response: {}
         }
     }
 
@@ -140,15 +140,16 @@ class Index extends React.Component {
                     <td>{question.title}</td>
                     <td>{question.solution}</td>
                     <td>
-                        <Button color="success" size="sm" className="mx-auto"
+                        <Button color="success" size="sm" className="mr-2"
                                 onClick={this.editQuestion.bind(this, question.id, question.title, question.solution)}
                         >Edit</Button>
-                        &nbsp;&nbsp;
-                        <Button color="danger" size="sm" className="mx-auto"
+
+                        <Button  color="danger" size="sm"
                                 onClick={this.deleteQuestion.bind(this, question.id)}
                         >Delete</Button>
 
-                        <Button color='primary' onClick={()=>this.toggleModal(question.id)} >Run query</Button>
+                        <Button  color='primary'
+                                onClick={()=>this.toggleModal(question.id)} >Run query</Button>
                     </td>
                 </tr>
             )
@@ -158,40 +159,24 @@ class Index extends React.Component {
             <div className="App container">
                 <h1>Question list </h1>
                 <Button color="primary" onClick={this.toggleNewQuestionModal.bind(this)}>Add question</Button>
-                <Modal isOpen={this.state.newQuestionModal} toggle={this.toggleNewQuestionModal.bind(this)}>
-                    <ModalHeader toggle={this.toggleNewQuestionModal.bind(this)}>Add a new question</ModalHeader>
-                    <ModalBody>
 
-                        <FormGroup>
-                            <Label for="title">Question</Label>
-                            <Input id="title"
-                                    value={this.state.newQuestionData.title}
-                                    onChange={(e) => {
-                                        let {newQuestionData} = this.state
-                                        newQuestionData.title = e.target.value
-                                        this.setState({newQuestionData} )
-                                    }}
-                            >sda</Input>
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="solution">Solution</Label>
-                            <Input id="solution"
-                                   value={this.state.newQuestionData.solution}
-                                   onChange={(e) => {
-                                       let {newQuestionData} = this.state
-                                       newQuestionData.solution = e.target.value
-                                       this.setState({newQuestionData} )
-                                   }}
-                            >sda</Input>
-                        </FormGroup>
-
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.addQuestion.bind(this)}>Add question</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleNewQuestionModal.bind(this)}>Cancel</Button>
-                    </ModalFooter>
-                </Modal>
+                <NewQuestionModal
+                    isOpen={this.state.newQuestionModal}
+                    close={this.toggleNewQuestionModal.bind(this)}
+                    titleValue={this.state.newQuestionData.title}
+                    onTitleChange={(e) => {
+                        let {newQuestionData} = this.state
+                        newQuestionData.title = e.target.value
+                        this.setState({newQuestionData} )
+                    }}
+                    solutionValue={this.state.newQuestionData.solution}
+                    onSolutionChange={(e) => {
+                        let {newQuestionData} = this.state
+                        newQuestionData.solution = e.target.value
+                        this.setState({newQuestionData} )
+                    }}
+                    onAddQuestion={this.addQuestion.bind(this)}
+                />
 
                 <Modal isOpen={this.state.editQuestionModal} toggle={this.toggleEditQuestionModal.bind(this)}>
                     <ModalHeader toggle={this.toggleEditQuestionModal.bind(this)}>Edit question</ModalHeader>
@@ -206,7 +191,7 @@ class Index extends React.Component {
                                        editQuestionData.title = e.target.value
                                        this.setState({editQuestionData} )
                                    }}
-                            >sda</Input>
+                            />
                         </FormGroup>
 
                         <FormGroup>
@@ -218,7 +203,7 @@ class Index extends React.Component {
                                        editQuestionData.solution = e.target.value
                                        this.setState({editQuestionData} )
                                    }}
-                            >sda</Input>
+                            />
                         </FormGroup>
 
                     </ModalBody>
@@ -233,6 +218,12 @@ class Index extends React.Component {
                     <Table className="table">
                         <tbody>
                             <tr>
+                                <th>Question:</th><td>{this.state.solutionData.title}</td>
+                            </tr>
+                            <tr>
+                                <th>Solution:</th><td>{this.state.solutionData.solution}</td>
+                            </tr>
+                            <tr>
                                 <th>data:</th><td>{this.state.solutionData.data}</td>
                             </tr>
                         </tbody>
@@ -241,7 +232,6 @@ class Index extends React.Component {
                         <Button color="secondary" onClick={this.toggleModal.bind(this)}>Cancel</Button>
                     </ModalFooter>
                 </Modal>
-
 
                 <Table>
                     <thead>
