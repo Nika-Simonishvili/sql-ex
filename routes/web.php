@@ -19,7 +19,3 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('questions/{id}/solution', [\App\Http\Controllers\QuestionsController::class, 'solution']);
-
-Route::resource('/pcs', PcsController::class);
-

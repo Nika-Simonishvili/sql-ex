@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import {Table, Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap'
+import {Table, Button, Modal, ModalHeader, ModalFooter,} from 'reactstrap'
 import axios from "axios";
 import NewQuestionModal from "./NewQuestionModal";
+import EditQuestionModal from "./EditQuestionModal";
 
 class Index extends React.Component {
 
@@ -29,6 +30,10 @@ class Index extends React.Component {
         }
     }
 
+    componentWillMount() {
+        this.loadQuestion()
+    }
+
     componentDidMount(){
         axios.get('http://127.0.0.1:8000/api/questions').then(response => response.data).then(
             (result)=>{
@@ -40,6 +45,14 @@ class Index extends React.Component {
                 this.setState({error});
             }
         )
+    }
+
+    loadQuestion() {
+        axios.get('http://127.0.0.1:8000/api/questions').then((response) => {
+            this.setState({
+                questions: response.data
+            })
+        })
     }
 
     toggleModal(questionId) {
@@ -58,21 +71,6 @@ class Index extends React.Component {
         });
     }
 
-    loadQuestion() {
-        axios.get('http://127.0.0.1:8000/api/questions').then((response) => {
-            this.setState({
-                questions: response.data
-            })
-        })
-    }
-
-
-    componentWillMount() {
-        this.loadQuestion()
-    }
-
-
-
     toggleNewQuestionModal(){
         this.setState({
             newQuestionModal: !this.state.newQuestionModal
@@ -85,7 +83,6 @@ class Index extends React.Component {
             editQuestionModal: !this.state.editQuestionModal
         })
     }
-
 
     addQuestion(){
         axios.post('http://127.0.0.1:8000/api/questions', this.state.newQuestionData).then((response) => {
@@ -130,8 +127,6 @@ class Index extends React.Component {
         })
     }
 
-
-
     render(){
         let questions = this.state.questions.map((question) => {
             return(
@@ -140,14 +135,14 @@ class Index extends React.Component {
                     <td>{question.title}</td>
                     <td>{question.solution}</td>
                     <td>
-                        <Button color="success" size="sm" className="mr-2"
+                        <Button color="success" size="sm" variant="mr-2"
                                 onClick={this.editQuestion.bind(this, question.id, question.title, question.solution)}
                         >Edit</Button>
-
+                        &nbsp;
                         <Button  color="danger" size="sm"
                                 onClick={this.deleteQuestion.bind(this, question.id)}
                         >Delete</Button>
-
+                        &nbsp;
                         <Button  color='primary'
                                 onClick={()=>this.toggleModal(question.id)} >Run query</Button>
                     </td>
@@ -178,44 +173,27 @@ class Index extends React.Component {
                     onAddQuestion={this.addQuestion.bind(this)}
                 />
 
-                <Modal isOpen={this.state.editQuestionModal} toggle={this.toggleEditQuestionModal.bind(this)}>
-                    <ModalHeader toggle={this.toggleEditQuestionModal.bind(this)}>Edit question</ModalHeader>
-                    <ModalBody>
-
-                        <FormGroup>
-                            <Label for="title">Question</Label>
-                            <Input id="title"
-                                   value={this.state.editQuestionData.title}
-                                   onChange={(e) => {
-                                       let {editQuestionData} = this.state
-                                       editQuestionData.title = e.target.value
-                                       this.setState({editQuestionData} )
-                                   }}
-                            />
-                        </FormGroup>
-
-                        <FormGroup>
-                            <Label for="solution">Solution</Label>
-                            <Input id="solution"
-                                   value={this.state.editQuestionData.solution}
-                                   onChange={(e) => {
-                                       let {editQuestionData} = this.state
-                                       editQuestionData.solution = e.target.value
-                                       this.setState({editQuestionData} )
-                                   }}
-                            />
-                        </FormGroup>
-
-                    </ModalBody>
-                    <ModalFooter>
-                        <Button color="primary" onClick={this.updateQuestion.bind(this)}>Update question</Button>{' '}
-                        <Button color="secondary" onClick={this.toggleEditQuestionModal.bind(this)}>Cancel</Button>
-                    </ModalFooter>
-                </Modal>
+                <EditQuestionModal
+                    isOpen={this.state.editQuestionModal}
+                    close={this.toggleEditQuestionModal.bind(this)}
+                    titleValue={this.state.editQuestionData.title}
+                    onTitleChange={(e) => {
+                        let {editQuestionData} = this.state
+                        editQuestionData.title = e.target.value
+                        this.setState({editQuestionData} )
+                    }}
+                    solutionValue={this.state.editQuestionData.solution}
+                    onSolutionChange={(e) => {
+                        let {editQuestionData} = this.state
+                        editQuestionData.solution = e.target.value
+                        this.setState({editQuestionData} )
+                    }}
+                    onEditQuestion={this.updateQuestion.bind(this)}
+                />
 
                 <Modal isOpen={this.state.isOpen} toggle={this.toggleModal.bind(this.id)}>
                     <ModalHeader toggle={this.toggleModal.bind(this)}  className="btn-primary">Query result</ModalHeader>
-                    <Table className="table">
+                    <Table variant="table">
                         <tbody>
                             <tr>
                                 <th>Question:</th><td>{this.state.solutionData.title}</td>

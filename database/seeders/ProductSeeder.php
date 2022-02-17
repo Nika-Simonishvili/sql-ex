@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 
 class ProductSeeder extends Seeder
@@ -15,31 +14,30 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        $array = array
-        (
-                 array('A',	1232, 'PC'),
-                 array('A', 1233, 'PC'),
-                 array('A',	1276, 'Printer'),
-                 array('A',	1298, 'Laptop'),
-                 array('A',	1401, 'Printer'),
-                 array('A',	1408, 'Printer'),
-                 array('A',	1752, 'Laptop'),
-                 array('B',	1121, 'PC'),
-                 array('B',	1750, 'Laptop'),
-                 array('C',	1321, 'Laptop'),
-                 array('D',	1288, 'Printer'),
-                 array('D',	1433, 'Printer'),
-                 array('E',	1260, 'PC'),
-                 array('E',	1434, 'Printer'),
-                 array('E',	2112, 'PC'),
-                 array('E',	2113, 'PC')
-        );
+        $array = [
+            ['A', 1232, 'PC'],
+            ['A', 1233, 'PC'],
+            ['A', 1276, 'Printer'],
+            ['A', 1298, 'Laptop'],
+            ['A', 1401, 'Printer'],
+            ['A', 1408, 'Printer'],
+            ['A', 1752, 'Laptop'],
+            ['B', 1121, 'PC'],
+            ['B', 1750, 'Laptop'],
+            ['C', 1321, 'Laptop'],
+            ['D', 1288, 'Printer'],
+            ['D', 1433, 'Printer'],
+            ['E', 1260, 'PC'],
+            ['E', 1434, 'Printer'],
+            ['E', 2112, 'PC'],
+            ['E', 2113, 'PC'],
+        ];
 
-        foreach ($array as $key) {
-            DB::table('products')->insert([
-                'maker' => $key[0],
-                'model' => $key[1],
-                'type' => $key[2]
+        foreach ($array as $value) {
+            Product::updateOrCreate([
+                'maker' => $value[0],
+                'model' => $value[1],
+                'type' => $value[2]
             ]);
         }
     }

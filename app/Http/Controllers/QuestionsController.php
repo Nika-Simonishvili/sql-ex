@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use App\Models\Question;
 
 class QuestionsController extends Controller
@@ -38,7 +37,7 @@ class QuestionsController extends Controller
         $question = Question::findOrFail($id);
 
         $solution = $request->input('solution');
-        $result = "App\Models\\" . $solution;
+        $result = "App\Models\\" . $solution;   // updates solution and based on that, gets $data
 
         $data = eval("return $result");
 
