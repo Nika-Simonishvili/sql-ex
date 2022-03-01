@@ -5270,7 +5270,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
  */
 
 
-__webpack_require__(/*! ./components/Index */ "./resources/js/components/Index.js");
+__webpack_require__(/*! ./components/Index1 */ "./resources/js/components/Index1.js");
 
 /***/ }),
 
@@ -5383,10 +5383,10 @@ var EditQuestionModal = function EditQuestionModal(_ref) {
 
 /***/ }),
 
-/***/ "./resources/js/components/Index.js":
-/*!******************************************!*\
-  !*** ./resources/js/components/Index.js ***!
-  \******************************************/
+/***/ "./resources/js/components/Index1.js":
+/*!*******************************************!*\
+  !*** ./resources/js/components/Index1.js ***!
+  \*******************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5402,27 +5402,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NewQuestionModal */ "./resources/js/components/NewQuestionModal.js");
 /* harmony import */ var _EditQuestionModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditQuestionModal */ "./resources/js/components/EditQuestionModal.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
@@ -5433,323 +5423,141 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
-var Index = /*#__PURE__*/function (_React$Component) {
-  _inherits(Index, _React$Component);
+function Index1() {
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      questions = _useState2[0],
+      setQuestions = _useState2[1];
 
-  var _super = _createSuper(Index);
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    title: "",
+    solution: "",
+    data: ""
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      newQuestionData = _useState4[0],
+      setNewQuestionData = _useState4[1];
 
-  function Index(props) {
-    var _this;
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    id: "",
+    title: "",
+    solution: "",
+    data: ""
+  }),
+      _useState6 = _slicedToArray(_useState5, 2),
+      editQuestionData = _useState6[0],
+      setEditQuestionData = _useState6[1];
 
-    _classCallCheck(this, Index);
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+      _useState8 = _slicedToArray(_useState7, 2),
+      solutionData = _useState8[0],
+      setSolutionData = _useState8[1];
 
-    _this = _super.call(this, props);
-    _this.state = {
-      questions: [],
-      newQuestionData: {
-        title: "",
-        solution: "",
-        data: ""
-      },
-      editQuestionData: {
-        id: "",
-        title: "",
-        solution: "",
-        data: ""
-      },
-      solutionData: {},
-      newQuestionModal: false,
-      editQuestionModal: false,
-      isOpen: false,
-      error: null
-    };
-    return _this;
-  }
+  var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState10 = _slicedToArray(_useState9, 2),
+      newQuestionModal = _useState10[0],
+      setNewQuestionModal = _useState10[1];
 
-  _createClass(Index, [{
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.loadQuestion();
-    }
-  }, {
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      var _this2 = this;
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState12 = _slicedToArray(_useState11, 2),
+      editQuestionModal = _useState12[0],
+      setEditQuestionModal = _useState12[1];
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions').then(function (response) {
-        return response.data;
-      }).then(function (result) {
-        _this2.setState({
-          questions: result
-        });
-      }, function (error) {
-        _this2.setState({
-          error: error
-        });
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+      _useState14 = _slicedToArray(_useState13, 2),
+      isOpen = _useState14[0],
+      setIsOpen = _useState14[1];
+
+  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions').then(function (result) {
+      return setQuestions(result.data);
+    });
+  }, []);
+
+  var handleDelete = function handleDelete(id, index) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default()["delete"]("http://127.0.0.1:8000/api/questions/".concat(id)).then(function (res) {
+      var newQues = questions.filter(function (elem) {
+        return questions.indexOf(elem) !== index;
       });
-    }
-  }, {
-    key: "loadQuestion",
-    value: function loadQuestion() {
-      var _this3 = this;
+      setQuestions(newQues);
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+  };
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions').then(function (response) {
-        _this3.setState({
-          questions: response.data
-        });
-      });
-    }
-  }, {
-    key: "toggleModal",
-    value: function toggleModal(questionId) {
-      var _this4 = this;
+  var handleOpenModal = function handleOpenModal() {
+    setIsOpen(true);
+  };
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions' + '/' + questionId).then(function (response) {
-        _this4.setState({
-          solutionData: response.data
-        });
-      }, function (error) {
-        _this4.setState({
-          error: error
-        });
-      });
-      this.setState({
-        isOpen: !this.state.isOpen
-      });
-    }
-  }, {
-    key: "toggleNewQuestionModal",
-    value: function toggleNewQuestionModal() {
-      this.setState({
-        newQuestionModal: !this.state.newQuestionModal
-      });
-    }
-  }, {
-    key: "toggleEditQuestionModal",
-    value: function toggleEditQuestionModal() {
-      this.setState({
-        editQuestionModal: !this.state.editQuestionModal
-      });
-    }
-  }, {
-    key: "addQuestion",
-    value: function addQuestion() {
-      var _this5 = this;
+  var handleCloseModal = function handleCloseModal() {
+    setIsOpen(false);
+  };
 
-      axios__WEBPACK_IMPORTED_MODULE_2___default().post('http://127.0.0.1:8000/api/questions', this.state.newQuestionData).then(function (response) {
-        var questions = _this5.state.questions;
-
-        _this5.loadQuestion();
-
-        _this5.setState({
-          questions: questions,
-          newQuestionModal: false,
-          newQuestionData: {
-            title: "",
-            solution: "",
-            data: ""
-          }
-        });
-      });
-    }
-  }, {
-    key: "updateQuestion",
-    value: function updateQuestion() {
-      var _this6 = this;
-
-      var _this$state$editQuest = this.state.editQuestionData,
-          id = _this$state$editQuest.id,
-          title = _this$state$editQuest.title,
-          solution = _this$state$editQuest.solution;
-      axios__WEBPACK_IMPORTED_MODULE_2___default().put('http://127.0.0.1:8000/api/questions/' + id, {
-        title: title,
-        solution: solution
-      }).then(function (response) {
-        _this6.loadQuestion();
-
-        _this6.setState({
-          editQuestionModal: false,
-          editQuestionData: {
-            id: "",
-            title: "",
-            solution: ""
-          }
-        });
-      });
-    }
-  }, {
-    key: "editQuestion",
-    value: function editQuestion(id, title, solution) {
-      this.setState({
-        editQuestionData: {
-          id: id,
-          title: title,
-          solution: solution
-        },
-        editQuestionModal: !this.state.editQuestionModal
-      });
-    }
-  }, {
-    key: "deleteQuestion",
-    value: function deleteQuestion(id) {
-      var _this7 = this;
-
-      axios__WEBPACK_IMPORTED_MODULE_2___default()["delete"]('http://127.0.0.1:8000/api/questions/' + id).then(function (response) {
-        _this7.loadQuestion();
-      });
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var _this8 = this;
-
-      var questions = this.state.questions.map(function (question) {
-        return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-            children: question.id
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-            children: question.title
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-            children: question.solution
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
-              color: "success",
-              size: "sm",
-              variant: "mr-2",
-              onClick: _this8.editQuestion.bind(_this8, question.id, question.title, question.solution),
-              children: "Edit"
-            }), "\xA0", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
-              color: "danger",
-              size: "sm",
-              onClick: _this8.deleteQuestion.bind(_this8, question.id),
-              children: "Delete"
-            }), "\xA0", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
-              color: "primary",
-              onClick: function onClick() {
-                return _this8.toggleModal(question.id);
-              },
-              children: "Run query"
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+    className: "App container",
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
+      children: "Question list "
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
+      color: "primary",
+      onClick: handleOpenModal,
+      children: "Add question"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Modal, {
+      isOpen: isOpen,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
+        onClick: handleCloseModal,
+        children: "x"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__["default"], {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Table, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("thead", {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+            children: "#"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+            children: "Question"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+            children: "Solution"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
+            children: "Actions"
+          })]
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", {
+        children: questions.map(function (question, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
+              children: question.id
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
+              children: question.title
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
+              children: question.solution
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("td", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
+                color: "success",
+                size: "sm",
+                variant: "mr-2",
+                children: "Edit"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
+                color: "danger",
+                size: "sm",
+                onClick: function onClick() {
+                  return handleDelete(question.id, index);
+                },
+                children: "Delete"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
+                color: "primary",
+                children: "Run query"
+              })]
             })]
-          })]
-        }, question.id);
-      });
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-        className: "App container",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
-          children: "Question list "
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
-          color: "primary",
-          onClick: this.toggleNewQuestionModal.bind(this),
-          children: "Add question"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
-          isOpen: this.state.newQuestionModal,
-          close: this.toggleNewQuestionModal.bind(this),
-          titleValue: this.state.newQuestionData.title,
-          onTitleChange: function onTitleChange(e) {
-            var newQuestionData = _this8.state.newQuestionData;
-            newQuestionData.title = e.target.value;
+          }, index);
+        })
+      })]
+    })]
+  });
+}
 
-            _this8.setState({
-              newQuestionData: newQuestionData
-            });
-          },
-          solutionValue: this.state.newQuestionData.solution,
-          onSolutionChange: function onSolutionChange(e) {
-            var newQuestionData = _this8.state.newQuestionData;
-            newQuestionData.solution = e.target.value;
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Index1);
 
-            _this8.setState({
-              newQuestionData: newQuestionData
-            });
-          },
-          onAddQuestion: this.addQuestion.bind(this)
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_EditQuestionModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
-          isOpen: this.state.editQuestionModal,
-          close: this.toggleEditQuestionModal.bind(this),
-          titleValue: this.state.editQuestionData.title,
-          onTitleChange: function onTitleChange(e) {
-            var editQuestionData = _this8.state.editQuestionData;
-            editQuestionData.title = e.target.value;
-
-            _this8.setState({
-              editQuestionData: editQuestionData
-            });
-          },
-          solutionValue: this.state.editQuestionData.solution,
-          onSolutionChange: function onSolutionChange(e) {
-            var editQuestionData = _this8.state.editQuestionData;
-            editQuestionData.solution = e.target.value;
-
-            _this8.setState({
-              editQuestionData: editQuestionData
-            });
-          },
-          onEditQuestion: this.updateQuestion.bind(this)
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Modal, {
-          isOpen: this.state.isOpen,
-          toggle: this.toggleModal.bind(this.id),
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.ModalHeader, {
-            toggle: this.toggleModal.bind(this),
-            className: "btn-primary",
-            children: "Query result"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Table, {
-            variant: "table",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tbody", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                  children: "Question:"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                  children: this.state.solutionData.title
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                  children: "Solution:"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                  children: this.state.solutionData.solution
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                  children: "data:"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
-                  children: this.state.solutionData.data
-                })]
-              })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.ModalFooter, {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
-              color: "secondary",
-              onClick: this.toggleModal.bind(this),
-              children: "Cancel"
-            })
-          })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Table, {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("thead", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                children: "#"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                children: "Question"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                children: "Solution"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("th", {
-                children: "Actions"
-              })]
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", {
-            children: questions
-          })]
-        })]
-      });
-    }
-  }]);
-
-  return Index;
-}(react__WEBPACK_IMPORTED_MODULE_0__.Component);
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Index);
-
-if (document.getElementById('index')) {
-  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Index, {}), document.getElementById('index'));
+if (document.getElementById('index1')) {
+  react_dom__WEBPACK_IMPORTED_MODULE_1__.render( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Index1, {}), document.getElementById('index1'));
 }
 
 /***/ }),

@@ -5,6 +5,7 @@ import axios from "axios";
 import NewQuestionModal from "./NewQuestionModal";
 import EditQuestionModal from "./EditQuestionModal";
 
+
 class Index extends React.Component {
 
     constructor(props){
@@ -230,8 +231,8 @@ class Index extends React.Component {
     }
 }
 
-export default Index;
+export default Index_old;
 
 if (document.getElementById('index')) {
-    ReactDOM.render(<Index />, document.getElementById('index'));
+    ReactDOM.render(<Index_old />, document.getElementById('index'));
 }

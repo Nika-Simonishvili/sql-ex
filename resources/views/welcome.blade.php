@@ -10,7 +10,7 @@
 </head>
 
 <body>
-    <div id="index">
+    <div id="index1">
 
     </div>
 </body>
