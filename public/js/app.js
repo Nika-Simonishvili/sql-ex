@@ -5310,79 +5310,6 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/js/components/EditQuestionModal.js":
-/*!******************************************************!*\
-  !*** ./resources/js/components/EditQuestionModal.js ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-
-
-
-var EditQuestionModal = function EditQuestionModal(_ref) {
-  var isOpen = _ref.isOpen,
-      close = _ref.close,
-      titleValue = _ref.titleValue,
-      solutionValue = _ref.solutionValue,
-      onEditQuestion = _ref.onEditQuestion,
-      onTitleChange = _ref.onTitleChange,
-      onSolutionChange = _ref.onSolutionChange;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Modal, {
-    isOpen: isOpen,
-    toggle: close,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalHeader, {
-      toggle: close,
-      children: "Edit question"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalBody, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
-          "for": "title",
-          children: "Question"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
-          id: "title",
-          value: titleValue,
-          onChange: onTitleChange,
-          children: "sda"
-        })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
-          "for": "solution",
-          children: "Solution"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
-          id: "solution",
-          value: solutionValue,
-          onChange: onSolutionChange,
-          children: "sda"
-        })]
-      })]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        color: "primary",
-        onClick: onEditQuestion,
-        children: "Edit question"
-      }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
-        color: "secondary",
-        onClick: close,
-        children: "Cancel"
-      })]
-    })]
-  });
-};
-
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (EditQuestionModal);
-
-/***/ }),
-
 /***/ "./resources/js/components/Index1.js":
 /*!*******************************************!*\
   !*** ./resources/js/components/Index1.js ***!
@@ -5395,13 +5322,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./NewQuestionModal */ "./resources/js/components/NewQuestionModal.js");
-/* harmony import */ var _EditQuestionModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EditQuestionModal */ "./resources/js/components/EditQuestionModal.js");
+/* harmony import */ var _modals_NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modals/NewQuestionModal */ "./resources/js/components/modals/NewQuestionModal.js");
+/* harmony import */ var _modals_showResultModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modals/showResultModal */ "./resources/js/components/modals/showResultModal.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5424,62 +5357,94 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function Index1() {
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    questionsData: {
+      title: '',
+      solution: '',
+      data: ''
+    },
+    questions: []
+  }),
       _useState2 = _slicedToArray(_useState, 2),
-      questions = _useState2[0],
-      setQuestions = _useState2[1];
+      data = _useState2[0],
+      setData = _useState2[1];
 
   var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    title: "",
-    solution: "",
-    data: ""
+    id: '',
+    title: '',
+    solution: '',
+    data: ''
   }),
       _useState4 = _slicedToArray(_useState3, 2),
-      newQuestionData = _useState4[0],
-      setNewQuestionData = _useState4[1];
+      editQuestionData = _useState4[0],
+      setEditQuestionData = _useState4[1];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
-    id: "",
-    title: "",
-    solution: "",
-    data: ""
-  }),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
-      editQuestionData = _useState6[0],
-      setEditQuestionData = _useState6[1];
+      isOpen = _useState6[0],
+      setIsOpen = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({}),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
       _useState8 = _slicedToArray(_useState7, 2),
-      solutionData = _useState8[0],
-      setSolutionData = _useState8[1];
+      result = _useState8[0],
+      setResult = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
       _useState10 = _slicedToArray(_useState9, 2),
-      newQuestionModal = _useState10[0],
-      setNewQuestionModal = _useState10[1];
+      openResultModal = _useState10[0],
+      setOpenResultModal = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState12 = _slicedToArray(_useState11, 2),
-      editQuestionModal = _useState12[0],
-      setEditQuestionModal = _useState12[1];
+  var BASE_URL = 'http://127.0.0.1:8000/api/questions';
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
-      _useState14 = _slicedToArray(_useState13, 2),
-      isOpen = _useState14[0],
-      setIsOpen = _useState14[1];
+  var loadQuestions = function loadQuestions() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL).then(function (result) {
+      return setData(_objectSpread(_objectSpread({}, data), {}, {
+        questions: result.data
+      }));
+    });
+  };
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get('http://127.0.0.1:8000/api/questions').then(function (result) {
-      return setQuestions(result.data);
-    });
+    loadQuestions();
   }, []);
 
+  var handleNewQuestion = function handleNewQuestion() {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().post(BASE_URL, data.questionsData).then(function (response) {
+      setData(_objectSpread(_objectSpread({}, data), {}, {
+        questionsData: response.data
+      }));
+      loadQuestions();
+    });
+    setIsOpen(false);
+  };
+
+  var handleOnChange = function handleOnChange(e) {
+    var name = e.target.name;
+    var value = e.target.value;
+    var prevdata = data.questionsData;
+    prevdata[name] = value;
+    setData(_objectSpread(_objectSpread({}, data), {}, {
+      questionsData: prevdata
+    }));
+  };
+
+  var handleResultShow = function handleResultShow(id) {
+    axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL + '/' + id).then(function (res) {
+      return setResult(res.data);
+    })["catch"](function (err) {
+      return console.log(err);
+    });
+    handleResultModal();
+  };
+
   var handleDelete = function handleDelete(id, index) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default()["delete"]("http://127.0.0.1:8000/api/questions/".concat(id)).then(function (res) {
-      var newQues = questions.filter(function (elem) {
-        return questions.indexOf(elem) !== index;
+    axios__WEBPACK_IMPORTED_MODULE_2___default()["delete"](BASE_URL + '/' + id).then(function (res) {
+      var newQues = data.questions.filter(function (elem) {
+        return data.questions.indexOf(elem) !== index;
       });
-      setQuestions(newQues);
+      setData(_objectSpread(_objectSpread({}, data), {}, {
+        questions: newQues
+      }));
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -5493,6 +5458,10 @@ function Index1() {
     setIsOpen(false);
   };
 
+  var handleResultModal = function handleResultModal() {
+    setOpenResultModal(!openResultModal);
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
     className: "App container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h1", {
@@ -5501,12 +5470,13 @@ function Index1() {
       color: "primary",
       onClick: handleOpenModal,
       children: "Add question"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Modal, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_modals_NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
       isOpen: isOpen,
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("button", {
-        onClick: handleCloseModal,
-        children: "x"
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__["default"], {})]
+      close: handleCloseModal,
+      onAddQuestion: handleNewQuestion,
+      onTitleChange: function onTitleChange(e) {
+        return handleOnChange(e);
+      }
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Table, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("thead", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
@@ -5521,7 +5491,7 @@ function Index1() {
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("tbody", {
-        children: questions.map(function (question, index) {
+        children: data.questions.map(function (question, index) {
           return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("tr", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("td", {
               children: question.id
@@ -5544,7 +5514,14 @@ function Index1() {
                 children: "Delete"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_6__.Button, {
                 color: "primary",
+                onClick: function onClick() {
+                  return handleResultShow(question.id);
+                },
                 children: "Run query"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_modals_showResultModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                setIsOpen: handleResultModal,
+                isOpen: openResultModal,
+                data: result
               })]
             })]
           }, index);
@@ -5562,10 +5539,10 @@ if (document.getElementById('index1')) {
 
 /***/ }),
 
-/***/ "./resources/js/components/NewQuestionModal.js":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/NewQuestionModal.js ***!
-  \*****************************************************/
+/***/ "./resources/js/components/modals/NewQuestionModal.js":
+/*!************************************************************!*\
+  !*** ./resources/js/components/modals/NewQuestionModal.js ***!
+  \************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -5584,14 +5561,10 @@ __webpack_require__.r(__webpack_exports__);
 var NewQuestionModal = function NewQuestionModal(_ref) {
   var isOpen = _ref.isOpen,
       close = _ref.close,
-      titleValue = _ref.titleValue,
-      solutionValue = _ref.solutionValue,
       onAddQuestion = _ref.onAddQuestion,
-      onTitleChange = _ref.onTitleChange,
-      onSolutionChange = _ref.onSolutionChange;
+      onTitleChange = _ref.onTitleChange;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Modal, {
     isOpen: isOpen,
-    toggle: close,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalHeader, {
       toggle: close,
       children: "Add a new question"
@@ -5602,9 +5575,8 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
           children: "Question"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "title",
-          value: titleValue,
-          onChange: onTitleChange,
-          children: "sda"
+          name: "title",
+          onChange: onTitleChange
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
@@ -5612,9 +5584,8 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
           children: "Solution"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "solution",
-          value: solutionValue,
-          onChange: onSolutionChange,
-          children: "sda"
+          name: "solution",
+          onChange: onTitleChange
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
@@ -5622,7 +5593,7 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
         color: "primary",
         onClick: onAddQuestion,
         children: "Add question"
-      }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         color: "secondary",
         onClick: close,
         children: "Cancel"
@@ -5632,6 +5603,74 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (NewQuestionModal);
+
+/***/ }),
+
+/***/ "./resources/js/components/modals/showResultModal.js":
+/*!***********************************************************!*\
+  !*** ./resources/js/components/modals/showResultModal.js ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+
+
+var ShowResultModal = function ShowResultModal(_ref) {
+  var isOpen = _ref.isOpen,
+      data = _ref.data,
+      setIsOpen = _ref.setIsOpen;
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Modal, {
+    isOpen: isOpen,
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalHeader, {
+      children: "data:"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalBody, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Table, {
+        variant: "table",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tbody", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
+              children: "Question:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
+              children: data.title
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
+              children: "Solution:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
+              children: data.solution
+            })]
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
+              children: "data:"
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
+              children: data.data
+            })]
+          })]
+        })
+      })
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        color: "secondary",
+        onClick: function onClick() {
+          return setIsOpen(isOpen);
+        },
+        children: "Cancel"
+      })
+    })]
+  });
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (ShowResultModal);
 
 /***/ }),
 
@@ -6385,12 +6424,6 @@ class BaseComponent {
 
 }
 
-/**
- * --------------------------------------------------------------------------
- * Bootstrap (v5.1.3): util/component-functions.js
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
- * --------------------------------------------------------------------------
- */
 
 const enableDismissTrigger = (component, method = 'hide') => {
   const clickEvent = `click.dismiss${component.EVENT_KEY}`;
@@ -54870,7 +54903,7 @@ function injectIntoDevTools(devToolsConfig) {
     scheduleRoot:  scheduleRoot ,
     setRefreshHandler:  setRefreshHandler ,
     // Enables DevTools to append owner stacks to error messages in DEV mode.
-    getCurrentFiber:  getCurrentFiberForDevTools 
+    getCurrentFiber:  getCurrentFiberForDevTools
   });
 }
 
@@ -63669,7 +63702,7 @@ Fade.defaultProps = defaultProps$_;
  * AccordionContext
  * {
  *  toggle: PropTypes.func.isRequired,
- *  openId: PropTypes.string,    
+ *  openId: PropTypes.string,
  * }
  */
 
@@ -68573,7 +68606,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /************************************************************************/
 /******/ 	// The module cache
 /******/ 	var __webpack_module_cache__ = {};
-/******/ 	
+/******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
 /******/ 		// Check if module is in cache
@@ -68587,20 +68620,20 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			loaded: false,
 /******/ 			exports: {}
 /******/ 		};
-/******/ 	
+/******/
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/ 	
+/******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.loaded = true;
-/******/ 	
+/******/
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
+/******/
 /******/ 	// expose the modules object (__webpack_modules__)
 /******/ 	__webpack_require__.m = __webpack_modules__;
-/******/ 	
+/******/
 /************************************************************************/
 /******/ 	/* webpack/runtime/chunk loaded */
 /******/ 	(() => {
@@ -68633,7 +68666,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			return result;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/compat get default export */
 /******/ 	(() => {
 /******/ 		// getDefaultExport function for compatibility with non-harmony modules
@@ -68645,7 +68678,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			return getter;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/define property getters */
 /******/ 	(() => {
 /******/ 		// define getter functions for harmony exports
@@ -68657,7 +68690,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			}
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/global */
 /******/ 	(() => {
 /******/ 		__webpack_require__.g = (function() {
@@ -68669,12 +68702,12 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			}
 /******/ 		})();
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/make namespace object */
 /******/ 	(() => {
 /******/ 		// define __esModule on exports
@@ -68685,7 +68718,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			Object.defineProperty(exports, '__esModule', { value: true });
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/node module decorator */
 /******/ 	(() => {
 /******/ 		__webpack_require__.nmd = (module) => {
@@ -68694,11 +68727,11 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			return module;
 /******/ 		};
 /******/ 	})();
-/******/ 	
+/******/
 /******/ 	/* webpack/runtime/jsonp chunk loading */
 /******/ 	(() => {
 /******/ 		// no baseURI
-/******/ 		
+/******/
 /******/ 		// object to store loaded and loading chunks
 /******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
@@ -68706,19 +68739,19 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			"/js/app": 0,
 /******/ 			"css/app": 0
 /******/ 		};
-/******/ 		
+/******/
 /******/ 		// no chunk on demand loading
-/******/ 		
+/******/
 /******/ 		// no prefetching
-/******/ 		
+/******/
 /******/ 		// no preloaded
-/******/ 		
+/******/
 /******/ 		// no HMR
-/******/ 		
+/******/
 /******/ 		// no HMR manifest
-/******/ 		
+/******/
 /******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
-/******/ 		
+/******/
 /******/ 		// install a JSONP callback for chunk loading
 /******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
@@ -68743,20 +68776,20 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 			}
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
-/******/ 		
+/******/
 /******/ 		var chunkLoadingGlobal = self["webpackChunk"] = self["webpackChunk"] || [];
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
-/******/ 	
+/******/
 /************************************************************************/
-/******/ 	
+/******/
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/app.js")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/css/app.css")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
-/******/ 	
+/******/
 /******/ })()
 ;
