@@ -10,7 +10,7 @@
 </head>
 
 <body style="background-color:lavender">
-    <div id="index1">
+    <div id="questions">
 
     </div>
 </body>

@@ -1,23 +1,26 @@
 import React, {useState, useEffect} from 'react';
-import {Table, Button} from 'reactstrap'
+import {Table, Button, Modal, ModalHeader, ModalBody, FormGroup, Label, Input, ModalFooter} from 'reactstrap'
 import ReactDOM from 'react-dom';
 import axios from "axios";
 import NewQuestionModal from "./modals/NewQuestionModal";
+import EditQuestionModal from "./modals/EditQuestionModal";
 import ShowResultModal from "./modals/showResultModal";
 
-function Index1() {
+function Questions() {
 
     const [data, setData] = useState({
-        questionsData: {title: '', solution: '', data: ''},
+        questionsData: {title: "", solution: "", data: ""},
         questions: [],
     });
-
-    const [editQuestionData, setEditQuestionData] = useState({
-        id: '', title: '',
-        solution: '', data: '',
+    const [editQuestion, setEditQuestion] = useState({
+        id: "", title: "",
+        solution: "", data: "",
     });
-    const [isOpen, setIsOpen] = useState(false);
+
     const [result, setResult] = useState([]);
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [editModal, setEditModal] = useState(false);
     const [openResultModal, setOpenResultModal] = useState(false);
 
     const BASE_URL = 'http://127.0.0.1:8000/api/questions';
@@ -30,6 +33,7 @@ function Index1() {
     useEffect(() => {
         loadQuestions();
     }, []);
+
 
     const handleNewQuestion = () => {
         axios.post(BASE_URL, data.questionsData)
@@ -47,6 +51,29 @@ function Index1() {
         const prevdata = data.questionsData;
         prevdata[name] = value;
         setData({...data, questionsData: prevdata});
+    }
+
+    const handleEdit = (id) => {
+        axios.put(BASE_URL + '/' + id, editQuestion)
+            .then((res) => {
+                setEditQuestion(res.data);
+                loadQuestions();
+                console.log(editQuestion);
+            })
+            .catch(err => console.log(err));
+    }
+
+    const handleEditOnChange = (e) => {
+        const {name, value} = e.target;
+        setEditQuestion({...editQuestion, [name]: value});
+    }
+
+    const handleOpenEditModal = (id) => {
+        setEditModal(true);
+        axios.get(BASE_URL + '/' + id)
+            .then(res => {
+                setEditQuestion(res.data);
+            })
     }
 
     const handleResultShow = (id) => {
@@ -73,9 +100,12 @@ function Index1() {
         setIsOpen(false);
     }
 
+    const handleCloseEditModal = () => setEditModal(false);
+
     const handleResultModal = () => {
         setOpenResultModal(!openResultModal);
     }
+
 
     return (
         <div className="App container">
@@ -107,13 +137,42 @@ function Index1() {
                         <td>{question.title}</td>
                         <td>{question.solution}</td>
                         <td>
-                            <Button color="success" size="sm" variant="mr-2">Edit</Button>
+                            <Button color="success" size="sm" variant="mr-2"
+                                    onClick={() => handleOpenEditModal(question.id)}>Edit</Button>
+
+                            <Modal isOpen={editModal}>
+                                <ModalHeader>Edit question</ModalHeader>
+                                <ModalBody>
+
+                                    <FormGroup>
+                                        <Label for="title">Question</Label>
+                                        <Input id="title"
+                                               value={editQuestion.title}
+                                               onChange={handleEditOnChange}
+                                        />
+                                    </FormGroup>
+
+                                    <FormGroup>
+                                        <Label for="solution">Solution</Label>
+                                        <Input id="solution"
+                                               value={editQuestion.solution}
+                                               onChange={handleEditOnChange}
+                                        />
+                                    </FormGroup>
+
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button color="primary" onClick={() => handleEdit(question.id)}>Edit
+                                        question</Button>
+                                    <Button color="secondary" onClick={handleCloseEditModal}>Cancel</Button>
+                                </ModalFooter>
+                            </Modal>
 
                             <Button color="danger" size="sm"
-                                    onClick={() => handleDelete(question.id, index)}
-                            >Delete</Button>
+                                    onClick={() => handleDelete(question.id, index)}>Delete</Button>
 
-                            <Button color='primary' onClick={() => handleResultShow(question.id)}>Run query</Button>
+                            <Button color='primary'
+                                    onClick={() => handleResultShow(question.id)}>Run query</Button>
 
                             <ShowResultModal
                                 setIsOpen={handleResultModal}
@@ -130,8 +189,8 @@ function Index1() {
     )
 }
 
-export default Index1;
+export default Questions;
 
-if (document.getElementById('index1')) {
-    ReactDOM.render(<Index1/>, document.getElementById('index1'));
+if (document.getElementById('questions')) {
+    ReactDOM.render(<Questions/>, document.getElementById('questions'));
 }

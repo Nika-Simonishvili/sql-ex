@@ -13,5 +13,5 @@ require('./bootstrap');
  */
 
 
-require('./components/Index1');
+require('./components/Questions');
 

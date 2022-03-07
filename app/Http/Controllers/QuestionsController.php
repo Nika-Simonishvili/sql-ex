@@ -45,7 +45,7 @@ class QuestionsController extends Controller
      */
     public function show($id)
     {
-        return Question::find($id);  // retrieve specific question with its id
+        return Question::findOrFail($id);  // retrieve specific question with its id
     }
 
     /**
