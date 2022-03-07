@@ -25,6 +25,7 @@ function Questions() {
 
     const BASE_URL = 'http://127.0.0.1:8000/api/questions';
 
+    //get all quesitnos
     const loadQuestions = () => {
         axios.get(BASE_URL)
             .then(result => setData({...data, questions: result.data}));
@@ -34,7 +35,7 @@ function Questions() {
         loadQuestions();
     }, []);
 
-
+    // new question functions
     const handleNewQuestion = () => {
         axios.post(BASE_URL, data.questionsData)
             .then(response => {
@@ -53,6 +54,15 @@ function Questions() {
         setData({...data, questionsData: prevdata});
     }
 
+    const handleOpenModal = () => {
+        setIsOpen(true);
+    }
+
+    const handleCloseModal = () => {
+        setIsOpen(false);
+    }
+
+    // edit question functions
     const handleEdit = (id) => {
         axios.put(BASE_URL + '/' + id, editQuestion)
             .then((res) => {
@@ -76,6 +86,9 @@ function Questions() {
             })
     }
 
+    const handleCloseEditModal = () => setEditModal(false);
+
+    // show result functions
     const handleResultShow = (id) => {
         axios.get(BASE_URL + '/' + id)
             .then(res => setResult(res.data))
@@ -83,6 +96,11 @@ function Questions() {
         handleResultModal();
     }
 
+    const handleResultModal = () => {
+        setOpenResultModal(!openResultModal);
+    }
+
+    // delete question
     const handleDelete = (id, index) => {
         axios.delete(BASE_URL + '/' + id)
             .then(res => {
@@ -91,21 +109,6 @@ function Questions() {
             })
             .catch(err => console.log(err));
     }
-
-    const handleOpenModal = () => {
-        setIsOpen(true);
-    }
-
-    const handleCloseModal = () => {
-        setIsOpen(false);
-    }
-
-    const handleCloseEditModal = () => setEditModal(false);
-
-    const handleResultModal = () => {
-        setOpenResultModal(!openResultModal);
-    }
-
 
     return (
         <div className="App container">

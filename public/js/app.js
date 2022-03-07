@@ -5401,7 +5401,7 @@ function Questions() {
       openResultModal = _useState12[0],
       setOpenResultModal = _useState12[1];
 
-  var BASE_URL = 'http://127.0.0.1:8000/api/questions';
+  var BASE_URL = 'http://127.0.0.1:8000/api/questions'; //get all quesitnos
 
   var loadQuestions = function loadQuestions() {
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL).then(function (result) {
@@ -5413,7 +5413,7 @@ function Questions() {
 
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     loadQuestions();
-  }, []);
+  }, []); // new question functions
 
   var handleNewQuestion = function handleNewQuestion() {
     axios__WEBPACK_IMPORTED_MODULE_2___default().post(BASE_URL, data.questionsData).then(function (response) {
@@ -5434,6 +5434,15 @@ function Questions() {
       questionsData: prevdata
     }));
   };
+
+  var handleOpenModal = function handleOpenModal() {
+    setIsOpen(true);
+  };
+
+  var handleCloseModal = function handleCloseModal() {
+    setIsOpen(false);
+  }; // edit question functions
+
 
   var handleEdit = function handleEdit(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default().put(BASE_URL + '/' + id, editQuestion).then(function (res) {
@@ -5459,6 +5468,11 @@ function Questions() {
     });
   };
 
+  var handleCloseEditModal = function handleCloseEditModal() {
+    return setEditModal(false);
+  }; // show result functions
+
+
   var handleResultShow = function handleResultShow(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL + '/' + id).then(function (res) {
       return setResult(res.data);
@@ -5467,6 +5481,11 @@ function Questions() {
     });
     handleResultModal();
   };
+
+  var handleResultModal = function handleResultModal() {
+    setOpenResultModal(!openResultModal);
+  }; // delete question
+
 
   var handleDelete = function handleDelete(id, index) {
     axios__WEBPACK_IMPORTED_MODULE_2___default()["delete"](BASE_URL + '/' + id).then(function (res) {
@@ -5479,22 +5498,6 @@ function Questions() {
     })["catch"](function (err) {
       return console.log(err);
     });
-  };
-
-  var handleOpenModal = function handleOpenModal() {
-    setIsOpen(true);
-  };
-
-  var handleCloseModal = function handleCloseModal() {
-    setIsOpen(false);
-  };
-
-  var handleCloseEditModal = function handleCloseEditModal() {
-    return setEditModal(false);
-  };
-
-  var handleResultModal = function handleResultModal() {
-    setOpenResultModal(!openResultModal);
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
