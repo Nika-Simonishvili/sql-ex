@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreQuestionRequest;
 use Illuminate\Http\Request;
 use App\Models\Question;
 
@@ -21,14 +22,20 @@ class QuestionsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return string
      */
-    public function store(Request $request)
+    public function store(StoreQuestionRequest $request)
     {
+        $request->validated();
+
         $solution = $request->input('solution');
         $result = "App\Models\\" . $solution;
 
-        $data = eval("return $result");   // evaluate solution as query and save given data
+        try {
+            $data = eval("return $result");   // evaluate solution as query and save given data
+        }catch (\Exception $err) {
+            return $err->getMessage();
+        };
 
         return Question::create([
             'title' => $request->input('title'),

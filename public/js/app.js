@@ -5401,6 +5401,11 @@ function Questions() {
       openResultModal = _useState12[0],
       setOpenResultModal = _useState12[1];
 
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+      _useState14 = _slicedToArray(_useState13, 2),
+      errors = _useState14[0],
+      setErrors = _useState14[1];
+
   var BASE_URL = 'http://127.0.0.1:8000/api/questions'; //get all quesitnos
 
   var loadQuestions = function loadQuestions() {
@@ -5421,8 +5426,10 @@ function Questions() {
         questionsData: response.data
       }));
       loadQuestions();
+      handleCloseModal();
+    })["catch"](function (err) {
+      setErrors(err.response.data.errors);
     });
-    setIsOpen(false);
   };
 
   var handleOnChange = function handleOnChange(e) {
@@ -5447,18 +5454,12 @@ function Questions() {
   var handleEdit = function handleEdit(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default().put(BASE_URL + '/' + id, editQuestion).then(function (res) {
       setEditQuestion(res.data);
+      console.log(id);
       loadQuestions();
-      console.log(editQuestion);
     })["catch"](function (err) {
       return console.log(err);
     });
-  };
-
-  var handleEditOnChange = function handleEditOnChange(e) {
-    var _e$target = e.target,
-        name = _e$target.name,
-        value = _e$target.value;
-    setEditQuestion(_objectSpread(_objectSpread({}, editQuestion), {}, _defineProperty({}, name, value)));
+    setEditModal(false);
   };
 
   var handleOpenEditModal = function handleOpenEditModal(id) {
@@ -5503,7 +5504,7 @@ function Questions() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "App container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
-      children: "Question list "
+      children: " Question List"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
       color: "primary",
       onClick: handleOpenModal,
@@ -5514,7 +5515,8 @@ function Questions() {
       onAddQuestion: handleNewQuestion,
       onTitleChange: function onTitleChange(e) {
         return handleOnChange(e);
-      }
+      },
+      errors: errors
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Table, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("thead", {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
@@ -5546,43 +5548,14 @@ function Questions() {
                   return handleOpenEditModal(question.id);
                 },
                 children: "Edit"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Modal, {
-                isOpen: editModal,
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalHeader, {
-                  children: "Edit question"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalBody, {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-                      "for": "title",
-                      children: "Question"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-                      id: "title",
-                      value: editQuestion.title,
-                      onChange: handleEditOnChange
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.FormGroup, {
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Label, {
-                      "for": "solution",
-                      children: "Solution"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Input, {
-                      id: "solution",
-                      value: editQuestion.solution,
-                      onChange: handleEditOnChange
-                    })]
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.ModalFooter, {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
-                    color: "primary",
-                    onClick: function onClick() {
-                      return handleEdit(question.id);
-                    },
-                    children: "Edit question"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
-                    color: "secondary",
-                    onClick: handleCloseEditModal,
-                    children: "Cancel"
-                  })]
-                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_modals_EditQuestionModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+                open: editModal,
+                state: editQuestion,
+                setState: setEditQuestion,
+                handleSubmit: function handleSubmit() {
+                  return handleEdit(editQuestion.id);
+                },
+                close: handleCloseEditModal
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "danger",
                 size: "sm",
@@ -5631,17 +5604,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
 
 
 var EditQuestionModal = function EditQuestionModal(_ref) {
-  var isOpen = _ref.isOpen,
+  var open = _ref.open,
+      state = _ref.state,
+      setState = _ref.setState,
       close = _ref.close,
-      onEdit = _ref.onEdit;
+      handleSubmit = _ref.handleSubmit;
+
+  var handleEditOnChange = function handleEditOnChange(e) {
+    var _e$target = e.target,
+        name = _e$target.name,
+        value = _e$target.value;
+    setState(_objectSpread(_objectSpread({}, state), {}, _defineProperty({}, name, value)));
+  };
+
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Modal, {
-    isOpen: isOpen,
+    isOpen: open,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalHeader, {
       children: "Edit question"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalBody, {
@@ -5650,26 +5639,28 @@ var EditQuestionModal = function EditQuestionModal(_ref) {
           "for": "title",
           children: "Question"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
-          id: "title" // value={titleValue}
-          // onChange={onTitleChange}
-
+          id: "title",
+          name: "title",
+          value: state.title,
+          onChange: handleEditOnChange
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
           "for": "solution",
           children: "Solution"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
-          id: "solution" // value={solutionValue}
-          // onChange={onSolutionChange}
-
+          id: "solution",
+          name: "solution",
+          value: state.solution,
+          onChange: handleEditOnChange
         })]
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         color: "primary",
-        onClick: onEdit,
+        onClick: handleSubmit,
         children: "Edit question"
-      }), ' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         color: "secondary",
         onClick: close,
         children: "Cancel"
@@ -5705,7 +5696,8 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
   var isOpen = _ref.isOpen,
       close = _ref.close,
       onAddQuestion = _ref.onAddQuestion,
-      onTitleChange = _ref.onTitleChange;
+      onTitleChange = _ref.onTitleChange,
+      errors = _ref.errors;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Modal, {
     isOpen: isOpen,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalHeader, {
@@ -5721,6 +5713,9 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
           name: "title",
           onChange: onTitleChange
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "text-danger",
+        children: errors.title
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
           "for": "solution",
@@ -5730,6 +5725,9 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
           name: "solution",
           onChange: onTitleChange
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "text-danger",
+        children: errors.solution
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {

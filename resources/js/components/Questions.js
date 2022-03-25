@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Table, Button, Modal, ModalHeader, ModalBody, FormGroup, Label, Input, ModalFooter} from 'reactstrap'
+import {Table, Button} from 'reactstrap'
 import ReactDOM from 'react-dom';
 import axios from "axios";
 import NewQuestionModal from "./modals/NewQuestionModal";
@@ -23,6 +23,8 @@ function Questions() {
     const [editModal, setEditModal] = useState(false);
     const [openResultModal, setOpenResultModal] = useState(false);
 
+    const [errors, setErrors] = useState([]);
+
     const BASE_URL = 'http://127.0.0.1:8000/api/questions';
 
     //get all quesitnos
@@ -41,9 +43,12 @@ function Questions() {
             .then(response => {
                     setData({...data, questionsData: response.data});
                     loadQuestions();
+                    handleCloseModal();
                 }
-            );
-        setIsOpen(false);
+            ).catch((err) => {
+                setErrors(err.response.data.errors)
+        });
+
     }
 
     const handleOnChange = (e) => {
@@ -67,15 +72,11 @@ function Questions() {
         axios.put(BASE_URL + '/' + id, editQuestion)
             .then((res) => {
                 setEditQuestion(res.data);
+                console.log(id);
                 loadQuestions();
-                console.log(editQuestion);
             })
             .catch(err => console.log(err));
-    }
-
-    const handleEditOnChange = (e) => {
-        const {name, value} = e.target;
-        setEditQuestion({...editQuestion, [name]: value});
+        setEditModal(false);
     }
 
     const handleOpenEditModal = (id) => {
@@ -112,7 +113,7 @@ function Questions() {
 
     return (
         <div className="App container">
-            <h1>Question list </h1>
+            <h1> Question List</h1>
             <Button color="primary"
                     onClick={handleOpenModal}>
                 Add question</Button>
@@ -122,6 +123,7 @@ function Questions() {
                 close={handleCloseModal}
                 onAddQuestion={handleNewQuestion}
                 onTitleChange={(e) => handleOnChange(e)}
+                errors={errors}
             />
 
             <Table>
@@ -143,33 +145,11 @@ function Questions() {
                             <Button color="success" size="sm" variant="mr-2"
                                     onClick={() => handleOpenEditModal(question.id)}>Edit</Button>
 
-                            <Modal isOpen={editModal}>
-                                <ModalHeader>Edit question</ModalHeader>
-                                <ModalBody>
-
-                                    <FormGroup>
-                                        <Label for="title">Question</Label>
-                                        <Input id="title"
-                                               value={editQuestion.title}
-                                               onChange={handleEditOnChange}
-                                        />
-                                    </FormGroup>
-
-                                    <FormGroup>
-                                        <Label for="solution">Solution</Label>
-                                        <Input id="solution"
-                                               value={editQuestion.solution}
-                                               onChange={handleEditOnChange}
-                                        />
-                                    </FormGroup>
-
-                                </ModalBody>
-                                <ModalFooter>
-                                    <Button color="primary" onClick={() => handleEdit(question.id)}>Edit
-                                        question</Button>
-                                    <Button color="secondary" onClick={handleCloseEditModal}>Cancel</Button>
-                                </ModalFooter>
-                            </Modal>
+                            <EditQuestionModal open={editModal}
+                                               state={editQuestion} setState={setEditQuestion}
+                                               handleSubmit={() => handleEdit(editQuestion.id)}
+                                               close={handleCloseEditModal}
+                            />
 
                             <Button color="danger" size="sm"
                                     onClick={() => handleDelete(question.id, index)}>Delete</Button>

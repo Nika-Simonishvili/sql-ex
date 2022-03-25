@@ -21,6 +21,7 @@ class Product extends Model
         return $this->hasMany(Pc::class, 'model', 'code');
     }
 
+
     public function laptops()
     {
         return $this->hasMany(Laptop::class, 'model', 'code');
