@@ -9,25 +9,25 @@ const NewQuestionModal = ({ isOpen, close, onAddQuestion, onTitleChange, errors}
             <ModalBody>
 
                 <FormGroup>
-                    <Label for="title">Question</Label>
+                    <Label for="title"><h6>Question</h6></Label>
                     <Input id="title" name="title"
                            onChange={onTitleChange}
                     />
                 </FormGroup>
 
                 <p className='text-danger'>
-                    {errors.title}
+                    {errors.validationErrors.title}
                 </p>
 
                 <FormGroup>
-                    <Label for="solution">Solution</Label>
+                    <Label for="solution"><h6>Solution</h6></Label>
                     <Input id="solution" name="solution"
                            onChange={onTitleChange}
                     />
                 </FormGroup>
 
                 <p className='text-danger'>
-                    {errors.solution}
+                    {errors.validationErrors.solution}
                 </p>
 
             </ModalBody>

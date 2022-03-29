@@ -23,11 +23,14 @@ function Questions() {
     const [editModal, setEditModal] = useState(false);
     const [openResultModal, setOpenResultModal] = useState(false);
 
-    const [errors, setErrors] = useState([]);
+    const [errors, setErrors] = useState({
+        validationErrors: [],
+        serverErrors: '',
+    });
 
     const BASE_URL = 'http://127.0.0.1:8000/api/questions';
 
-    //get all quesitnos
+    //get all questions
     const loadQuestions = () => {
         axios.get(BASE_URL)
             .then(result => setData({...data, questions: result.data}));
@@ -46,9 +49,9 @@ function Questions() {
                     handleCloseModal();
                 }
             ).catch((err) => {
-                setErrors(err.response.data.errors)
+                console.log(err.response.data.errors.title)
+                setErrors({...errors, validationErrors: err.response.data.errors});
         });
-
     }
 
     const handleOnChange = (e) => {
@@ -76,7 +79,7 @@ function Questions() {
                 loadQuestions();
             })
             .catch(err => console.log(err));
-        setEditModal(false);
+            setEditModal(false);
     }
 
     const handleOpenEditModal = (id) => {
@@ -114,6 +117,7 @@ function Questions() {
     return (
         <div className="App container">
             <h1> Question List</h1>
+            {/*{errors.serverErrors}*/}
             <Button color="primary"
                     onClick={handleOpenModal}>
                 Add question</Button>
@@ -142,7 +146,7 @@ function Questions() {
                         <td>{question.title}</td>
                         <td>{question.solution}</td>
                         <td>
-                            <Button color="success" size="sm" variant="mr-2"
+                            <Button color="success" size="sm"
                                     onClick={() => handleOpenEditModal(question.id)}>Edit</Button>
 
                             <EditQuestionModal open={editModal}
@@ -154,7 +158,7 @@ function Questions() {
                             <Button color="danger" size="sm"
                                     onClick={() => handleDelete(question.id, index)}>Delete</Button>
 
-                            <Button color='primary'
+                            <Button color='primary' size="sm"
                                     onClick={() => handleResultShow(question.id)}>Run query</Button>
 
                             <ShowResultModal

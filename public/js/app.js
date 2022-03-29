@@ -5401,12 +5401,15 @@ function Questions() {
       openResultModal = _useState12[0],
       setOpenResultModal = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([]),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+    validationErrors: [],
+    serverErrors: ''
+  }),
       _useState14 = _slicedToArray(_useState13, 2),
       errors = _useState14[0],
       setErrors = _useState14[1];
 
-  var BASE_URL = 'http://127.0.0.1:8000/api/questions'; //get all quesitnos
+  var BASE_URL = 'http://127.0.0.1:8000/api/questions'; //get all questions
 
   var loadQuestions = function loadQuestions() {
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL).then(function (result) {
@@ -5428,7 +5431,10 @@ function Questions() {
       loadQuestions();
       handleCloseModal();
     })["catch"](function (err) {
-      setErrors(err.response.data.errors);
+      console.log(err.response.data.errors.title);
+      setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+        validationErrors: err.response.data.errors
+      }));
     });
   };
 
@@ -5543,7 +5549,6 @@ function Questions() {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "success",
                 size: "sm",
-                variant: "mr-2",
                 onClick: function onClick() {
                   return handleOpenEditModal(question.id);
                 },
@@ -5565,6 +5570,7 @@ function Questions() {
                 children: "Delete"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "primary",
+                size: "sm",
                 onClick: function onClick() {
                   return handleResultShow(question.id);
                 },
@@ -5707,7 +5713,9 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
           "for": "title",
-          children: "Question"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h6", {
+            children: "Question"
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "title",
           name: "title",
@@ -5715,11 +5723,13 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
         className: "text-danger",
-        children: errors.title
+        children: errors.validationErrors.title
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
           "for": "solution",
-          children: "Solution"
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h6", {
+            children: "Solution"
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "solution",
           name: "solution",
@@ -5727,7 +5737,7 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
         })]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
         className: "text-danger",
-        children: errors.solution
+        children: errors.validationErrors.solution
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {

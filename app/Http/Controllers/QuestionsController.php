@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\editQuestionRequest;
 use App\Http\Requests\StoreQuestionRequest;
 use Illuminate\Http\Request;
 use App\Models\Question;
@@ -26,22 +27,17 @@ class QuestionsController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        $request->validated();
-
         $solution = $request->input('solution');
         $result = "App\Models\\" . $solution;
+        $data = eval("return $result");   // evaluate solution as query and save given data
 
-        try {
-            $data = eval("return $result");   // evaluate solution as query and save given data
-        }catch (\Exception $err) {
-            return $err->getMessage();
-        };
-
-        return Question::create([
+        Question::create([
             'title' => $request->input('title'),
             'solution' => $solution,
             'data' => $data
         ]);
+
+        return response('Cool','200');
     }
 
     /**
@@ -68,7 +64,6 @@ class QuestionsController extends Controller
 
         $solution = $request->input('solution');
         $result = "App\Models\\" . $solution;   // updates solution and based on that, gets $data
-
         $data = eval("return $result");
 
         $question->update([
@@ -76,7 +71,8 @@ class QuestionsController extends Controller
             'solution' => $solution,
             'data' => $data
         ]);
-        return $question;
+
+        return response('Cool','200');
     }
 
     /**
