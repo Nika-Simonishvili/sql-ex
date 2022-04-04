@@ -14,11 +14,11 @@ const ShowResultModal = ({isOpen, data, setIsOpen}) => {
                         <td>{data.title}</td>
                     </tr>
                     <tr>
-                        <th>Solution:</th>
+                        <th>Eloquent Solution:</th>
                         <td>{data.solution}</td>
                     </tr>
                     <tr>
-                        <th>data:</th>
+                        <th>Data:</th>
                         <td>{data.data}</td>
                     </tr>
                     </tbody>

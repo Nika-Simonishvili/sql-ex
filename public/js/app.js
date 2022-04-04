@@ -5414,7 +5414,7 @@ function Questions() {
   var loadQuestions = function loadQuestions() {
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL).then(function (result) {
       return setData(_objectSpread(_objectSpread({}, data), {}, {
-        questions: result.data
+        questions: result.data.questions
       }));
     });
   };
@@ -5471,7 +5471,7 @@ function Questions() {
   var handleOpenEditModal = function handleOpenEditModal(id) {
     setEditModal(true);
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL + '/' + id).then(function (res) {
-      setEditQuestion(res.data);
+      setEditQuestion(res.data.question);
     });
   };
 
@@ -5482,7 +5482,7 @@ function Questions() {
 
   var handleResultShow = function handleResultShow(id) {
     axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL + '/' + id).then(function (res) {
-      return setResult(res.data);
+      return setResult(res.data.question);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -5510,7 +5510,7 @@ function Questions() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
     className: "App container",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
-      children: " Question List"
+      children: "Questions List"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
       color: "primary",
       onClick: handleOpenModal,
@@ -5531,9 +5531,13 @@ function Questions() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "Question"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
-            children: "Solution"
+            children: "Eloquent Solution"
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
-            children: "Actions"
+            children: "Edit"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+            children: "Delete"
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
+            children: "Run"
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tbody", {
@@ -5548,7 +5552,6 @@ function Questions() {
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
               children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "success",
-                size: "sm",
                 onClick: function onClick() {
                   return handleOpenEditModal(question.id);
                 },
@@ -5561,20 +5564,22 @@ function Questions() {
                   return handleEdit(editQuestion.id);
                 },
                 close: handleCloseEditModal
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "danger",
-                size: "sm",
                 onClick: function onClick() {
                   return handleDelete(question.id, index);
                 },
                 children: "Delete"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+              })
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "primary",
-                size: "sm",
                 onClick: function onClick() {
                   return handleResultShow(question.id);
                 },
-                children: "Run query"
+                children: "Run"
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_modals_showResultModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
                 setIsOpen: handleResultModal,
                 isOpen: openResultModal,
@@ -5653,7 +5658,7 @@ var EditQuestionModal = function EditQuestionModal(_ref) {
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
           "for": "solution",
-          children: "Solution"
+          children: "Eloquent Solution"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "solution",
           name: "solution",
@@ -5728,7 +5733,7 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
           "for": "solution",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("h6", {
-            children: "Solution"
+            children: "Eloquent solution"
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "solution",
@@ -5796,13 +5801,13 @@ var ShowResultModal = function ShowResultModal(_ref) {
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-              children: "Solution:"
+              children: "Eloquent Solution:"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
               children: data.solution
             })]
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-              children: "data:"
+              children: "Data:"
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
               children: data.data
             })]

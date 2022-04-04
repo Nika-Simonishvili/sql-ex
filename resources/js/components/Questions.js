@@ -33,7 +33,7 @@ function Questions() {
     //get all questions
     const loadQuestions = () => {
         axios.get(BASE_URL)
-            .then(result => setData({...data, questions: result.data}));
+            .then(result => setData({...data, questions: result.data.questions}));
     }
 
     useEffect(() => {
@@ -86,7 +86,7 @@ function Questions() {
         setEditModal(true);
         axios.get(BASE_URL + '/' + id)
             .then(res => {
-                setEditQuestion(res.data);
+                setEditQuestion(res.data.question);
             })
     }
 
@@ -95,7 +95,7 @@ function Questions() {
     // show result functions
     const handleResultShow = (id) => {
         axios.get(BASE_URL + '/' + id)
-            .then(res => setResult(res.data))
+            .then(res => setResult(res.data.question))
             .catch(err => console.log(err));
         handleResultModal();
     }
@@ -116,8 +116,7 @@ function Questions() {
 
     return (
         <div className="App container">
-            <h1> Question List</h1>
-            {/*{errors.serverErrors}*/}
+            <h1>Questions List</h1>
             <Button color="primary"
                     onClick={handleOpenModal}>
                 Add question</Button>
@@ -135,8 +134,10 @@ function Questions() {
                 <tr>
                     <th>#</th>
                     <th>Question</th>
-                    <th>Solution</th>
-                    <th>Actions</th>
+                    <th>Eloquent Solution</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                    <th>Run</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -146,7 +147,7 @@ function Questions() {
                         <td>{question.title}</td>
                         <td>{question.solution}</td>
                         <td>
-                            <Button color="success" size="sm"
+                            <Button color="success"
                                     onClick={() => handleOpenEditModal(question.id)}>Edit</Button>
 
                             <EditQuestionModal open={editModal}
@@ -154,19 +155,20 @@ function Questions() {
                                                handleSubmit={() => handleEdit(editQuestion.id)}
                                                close={handleCloseEditModal}
                             />
-
-                            <Button color="danger" size="sm"
+                        </td>
+                        <td>
+                            <Button color="danger"
                                     onClick={() => handleDelete(question.id, index)}>Delete</Button>
+                        </td>
 
-                            <Button color='primary' size="sm"
-                                    onClick={() => handleResultShow(question.id)}>Run query</Button>
-
+                        <td>
+                            <Button color='primary'
+                                    onClick={() => handleResultShow(question.id)}>Run</Button>
                             <ShowResultModal
                                 setIsOpen={handleResultModal}
                                 isOpen={openResultModal}
                                 data={result}
                             />
-
                         </td>
                     </tr>
                 ))}

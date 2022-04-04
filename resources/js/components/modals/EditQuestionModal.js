@@ -22,7 +22,7 @@ const EditQuestionModal = ({open, state, setState, close, handleSubmit}) => {
                 </FormGroup>
 
                 <FormGroup>
-                    <Label for="solution">Solution</Label>
+                    <Label for="solution">Eloquent Solution</Label>
                     <Input id="solution" name="solution"
                            value={state.solution}
                            onChange={handleEditOnChange}

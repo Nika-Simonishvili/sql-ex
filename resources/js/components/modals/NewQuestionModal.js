@@ -20,7 +20,7 @@ const NewQuestionModal = ({ isOpen, close, onAddQuestion, onTitleChange, errors}
                 </p>
 
                 <FormGroup>
-                    <Label for="solution"><h6>Solution</h6></Label>
+                    <Label for="solution"><h6>Eloquent solution</h6></Label>
                     <Input id="solution" name="solution"
                            onChange={onTitleChange}
                     />

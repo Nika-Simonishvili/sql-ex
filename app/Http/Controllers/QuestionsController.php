@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\editQuestionRequest;
 use App\Http\Requests\StoreQuestionRequest;
+use App\Http\Resources\QuestionResource;
 use Illuminate\Http\Request;
 use App\Models\Question;
 
@@ -16,13 +16,18 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        return Question::all();  // get all questions
+        $questions = QuestionResource::collection(Question::all());  // get all questions
+
+        return response(
+            ['questions' => $questions],
+            200
+        );
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return string
      */
     public function store(StoreQuestionRequest $request)
@@ -37,25 +42,33 @@ class QuestionsController extends Controller
             'data' => $data
         ]);
 
-        return response('Cool','200');
+        return response(
+            ['message' => 'Question saved'],
+            200
+        );
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return Question::findOrFail($id);  // retrieve specific question with its id
+        $question = new QuestionResource(Question::findOrFail($id));  // retrieve specific question with its id
+
+        return response(
+            ['question' => $question],
+            200
+        );
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -72,20 +85,27 @@ class QuestionsController extends Controller
             'data' => $data
         ]);
 
-        return response('Cool','200');
+        return response(
+            ['message' => 'Updated successfully'],
+            200
+        );
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
-        $question -> delete();
-        return response(204);
+        $question->delete();
+
+        return response(
+            ['message' => 'question deleted'],
+            200
+        );
     }
 }
 
