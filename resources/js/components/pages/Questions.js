@@ -2,10 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap'
 import ReactDOM from 'react-dom';
 import axios from "axios";
-import NewQuestionModal from "./modals/NewQuestionModal";
-import EditQuestionModal from "./modals/EditQuestionModal";
-import ShowResultModal from "./modals/showResultModal";
-import Header from './parts/Header';
+import NewQuestionModal from "../modals/NewQuestionModal";
+import EditQuestionModal from "../modals/EditQuestionModal";
+import ShowResultModal from "../modals/showResultModal";
+import Header from '../parts/Header';
 
 function Questions() {
 
@@ -181,7 +181,3 @@ function Questions() {
 }
 
 export default Questions;
-
-if (document.getElementById('questions')) {
-    ReactDOM.render(<Questions/>, document.getElementById('questions'));
-}

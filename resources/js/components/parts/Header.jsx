@@ -16,25 +16,28 @@ function Header() {
 	const [isOpen, setIsOpen] = React.useState(false);
 
 	return (
-		
+
 			<Navbar color="dark" dark  >
 				<NavbarBrand href="/">Laravel Eloquent exercises</NavbarBrand>
 				<NavbarToggler onClick={() => { setIsOpen(!isOpen) }} />
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className="mr-auto" navbar>
 						<NavItem>
-							<NavLink href="#">Home</NavLink>
+							<NavLink href="/">Questions</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink href="#">Login</NavLink>
+							<NavLink href="/login">Login</NavLink>
 						</NavItem>
 						<NavItem>
-							<NavLink href="#">Signup</NavLink>
+							<NavLink href="/logout">Logout</NavLink>
+						</NavItem>
+						<NavItem>
+							<NavLink href="/register">Register</NavLink>
 						</NavItem>
 					</Nav>
 				</Collapse>
 			</Navbar>
-		
+
 	);
 }
 

@@ -21,11 +21,8 @@ class AuthController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        $token = $user->createToken('token')->plainTextToken;
-
         return response([
-            'message' => 'OK',
-            'token' => $token
+            'message' => 'Registered successfully'
         ]);
     }
 
@@ -51,6 +48,8 @@ class AuthController extends Controller
     {
         Auth::user()->tokens()->delete();
 
-        return response('ok');
+        return response([
+            'message' => 'looged out.'
+        ]);
     }
 }
