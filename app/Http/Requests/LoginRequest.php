@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\PreventDelete;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreQuestionRequest extends FormRequest
+class LoginRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,16 +24,8 @@ class StoreQuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'solution' => ['required', new PreventDelete],
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'Please, Enter the question!',
-            'solution.required' => 'Please, Enter the solution!'
+            'email' => 'required|email',
+            'password' => 'required'
         ];
     }
 }

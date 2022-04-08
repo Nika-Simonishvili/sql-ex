@@ -15,7 +15,4 @@ use App\Http\Controllers\PcsController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::view('/{any}', 'welcome')->where('any', '.*');

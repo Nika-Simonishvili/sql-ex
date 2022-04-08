@@ -5,6 +5,7 @@ import axios from "axios";
 import NewQuestionModal from "./modals/NewQuestionModal";
 import EditQuestionModal from "./modals/EditQuestionModal";
 import ShowResultModal from "./modals/showResultModal";
+import Header from './parts/Header';
 
 function Questions() {
 
@@ -25,7 +26,7 @@ function Questions() {
 
     const [errors, setErrors] = useState({
         validationErrors: [],
-        serverErrors: '',
+        serverErrors: [],
     });
 
     const BASE_URL = 'http://127.0.0.1:8000/api/questions';
@@ -49,7 +50,7 @@ function Questions() {
                     handleCloseModal();
                 }
             ).catch((err) => {
-                console.log(err.response.data.errors.title)
+               console.log(err.response.data.message)
                 setErrors({...errors, validationErrors: err.response.data.errors});
         });
     }
@@ -115,7 +116,8 @@ function Questions() {
     }
 
     return (
-        <div className="App container">
+        <>
+            <Header/>
             <h1>Questions List</h1>
             <Button color="primary"
                     onClick={handleOpenModal}>
@@ -174,7 +176,7 @@ function Questions() {
                 ))}
                 </tbody>
             </Table>
-        </div>
+        </>
     )
 }
 

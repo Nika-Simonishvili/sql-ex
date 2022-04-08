@@ -34,7 +34,12 @@ class QuestionsController extends Controller
     {
         $solution = $request->input('solution');
         $result = "App\Models\\" . $solution;
-        $data = eval("return $result");   // evaluate solution as query and save given data
+
+        try {
+            $data = eval("return $result");   // evaluate solution as query and save given data
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
 
         Question::create([
             'title' => $request->input('title'),
