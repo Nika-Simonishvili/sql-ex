@@ -6194,7 +6194,9 @@ function Header() {
     dark: true,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.NavbarBrand, {
       href: "/",
-      children: username
+      children: username ? username : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        children: "Laravel Eloquent exercises"
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.NavbarToggler, {
       onClick: function onClick() {
         setIsOpen(!isOpen);
@@ -6237,10 +6239,10 @@ function Header() {
 
 /***/ }),
 
-/***/ "./resources/js/components/routes/Checker.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/routes/Checker.js ***!
-  \***************************************************/
+/***/ "./resources/js/components/routes/Checker.jsx":
+/*!****************************************************!*\
+  !*** ./resources/js/components/routes/Checker.jsx ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6331,7 +6333,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_auth_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/auth/Login */ "./resources/js/components/pages/auth/Login.jsx");
 /* harmony import */ var _pages_auth_Logout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/auth/Logout */ "./resources/js/components/pages/auth/Logout.jsx");
 /* harmony import */ var _pages_auth_Register__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/auth/Register */ "./resources/js/components/pages/auth/Register.jsx");
-/* harmony import */ var _Checker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Checker */ "./resources/js/components/routes/Checker.js");
+/* harmony import */ var _Checker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Checker */ "./resources/js/components/routes/Checker.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -6347,11 +6349,11 @@ function RouteManager() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-        path: "/login",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_auth_Login__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/register",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_auth_Register__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        path: "/login",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_auth_Login__WEBPACK_IMPORTED_MODULE_2__["default"], {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Questions__WEBPACK_IMPORTED_MODULE_1__["default"], {})

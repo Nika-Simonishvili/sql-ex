@@ -11,8 +11,8 @@ export default function RouteManager() {
   return (
     <>
         <Routes>
-            <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
 
             <Route path="/" element={<Questions />} />
             <Route path="/logout" element={<Checker> <Logout/> </Checker>} />

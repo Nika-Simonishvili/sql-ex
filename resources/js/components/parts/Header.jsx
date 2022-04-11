@@ -19,7 +19,7 @@ function Header() {
 	return (
 
 			<Navbar color="dark" dark  >
-				<NavbarBrand href="/">{username}</NavbarBrand>
+				<NavbarBrand href="/">{username ? username : (<p>Laravel Eloquent exercises</p>)}</NavbarBrand>
 				<NavbarToggler onClick={() => { setIsOpen(!isOpen) }} />
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className="mr-auto" navbar>
