@@ -17,6 +17,7 @@ export default function Login() {
     const onSubmit = data => {
         axios.post('api/login', data).then(res => {
             localStorage.setItem('token', JSON.stringify(res.data.token));
+            localStorage.setItem('username', JSON.stringify(res.data.user.name));
             navigate('/');
         }).catch((err) => {
             if (err.response && err.response.status === 422) {

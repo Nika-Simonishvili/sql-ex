@@ -8,7 +8,8 @@ export default function Logout() {
     useEffect(() => {
         axios.post('api/logout', {}).then((res) => {
             localStorage.removeItem('token');
-            navigate('/');
+            localStorage.removeItem('username');
+            navigate('/login');
         })
     }, []);
 

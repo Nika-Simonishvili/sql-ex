@@ -40,6 +40,7 @@ class AuthController extends Controller
 
         return response([
             'message' => 'OK',
+            'user' => Auth::user(),
             'token' => $token
         ]);
     }
@@ -49,7 +50,7 @@ class AuthController extends Controller
         Auth::user()->tokens()->delete();
 
         return response([
-            'message' => 'looged out.'
+            'message' => 'logged  out.'
         ]);
     }
 }
