@@ -26,6 +26,7 @@ class StoreQuestionRequest extends FormRequest
     {
         return [
             'title' => 'required',
+            'solution' => ['required', new PreventDelete]
         ];
     }
 
@@ -33,6 +34,7 @@ class StoreQuestionRequest extends FormRequest
     {
         return [
             'title.required' => 'Please, Enter the question!',
+            'solution.required' => 'Please, Enter the solution!',
         ];
     }
 }

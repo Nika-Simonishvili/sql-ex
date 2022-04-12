@@ -26,8 +26,9 @@ Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'regis
 Route::middleware('auth:sanctum')->group( function() {
     Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
     Route::post('questions', [QuestionsController::class, 'store']);
+    Route::put('questions/{id}', [QuestionsController::class, 'update']);
+    Route::delete('questions/{id}', [QuestionsController::class, 'destroy']);
 });
 
 Route::get('questions', [QuestionsController::class, 'index']);
 Route::get('questions/{id}', [QuestionsController::class, 'show']);
-Route::delete('questions/{id}', [QuestionsController::class, 'destroy']);

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Resources\QuestionResource;
-use Illuminate\Http\Request;
 use App\Models\Question;
 use App\Models\Solution;
 use Illuminate\Support\Facades\Auth;
@@ -37,7 +36,7 @@ class QuestionsController extends Controller
 
         $question->solutions()->create([
             'solution' => $request->input('solution'),
-            'user_id' => Auth::id()
+            'user_id' => Auth::id(),
         ]);
 
         return response( ['message' => 'Question saved'] );
@@ -73,20 +72,18 @@ class QuestionsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreQuestionRequest $request, $id)
     {
         $question = Question::findOrFail($id);
-
         $question->update([
-            'title' => $request->input('title'),
-            'solution' => $solution,
-            'data' => $data
+            'title' =>  $request->input('title'),
         ]);
 
-        return response(
-            ['message' => 'Updated successfully'],
-            200
-        );
+        $question->solutions()->update([
+            'solution' => $request->input('solution'),
+        ]);
+
+        return response( ['message' => 'Updated successfully'] );
     }
 
     /**
