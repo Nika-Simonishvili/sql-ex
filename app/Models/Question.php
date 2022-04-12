@@ -10,9 +10,8 @@ class Question extends Model
 {
     use HasFactory;
 
-    protected $hidden = ['timestamps'];
-
     protected $guarded = [];
+    protected $hidden = ['id', 'created_at', 'updated_at'];
 
     public function solutions()
     {
