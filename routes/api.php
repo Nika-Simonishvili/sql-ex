@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionsController;
+use App\Http\Controllers\SolutionController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,7 +25,9 @@ Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'regis
 
 Route::middleware('auth:sanctum')->group( function() {
     Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
+    Route::post('questions', [QuestionsController::class, 'store']);
 });
 
-Route::apiResource('questions', QuestionsController::class);
-
+Route::get('questions', [QuestionsController::class, 'index']);
+Route::get('questions/{id}', [QuestionsController::class, 'show']);
+Route::delete('questions/{id}', [QuestionsController::class, 'destroy']);

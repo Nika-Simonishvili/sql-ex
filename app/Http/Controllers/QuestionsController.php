@@ -6,6 +6,8 @@ use App\Http\Requests\StoreQuestionRequest;
 use App\Http\Resources\QuestionResource;
 use Illuminate\Http\Request;
 use App\Models\Question;
+use Illuminate\Support\Facades\Auth;
+use Laravel\Ui\Presets\React;
 
 class QuestionsController extends Controller
 {
@@ -32,23 +34,24 @@ class QuestionsController extends Controller
      */
     public function store(StoreQuestionRequest $request)
     {
-        $solution = $request->input('solution');
-        $result = "App\Models\\" . $solution;
-
-        try {
-            $data = eval("return $result");   // evaluate solution as query and save given data
-        } catch (\Exception $e) {
-            return $e->getMessage();
-        }
-
-        Question::create([
+        $question = Question::create([
             'title' => $request->input('title'),
-            'solution' => $solution,
-            'data' => $data
         ]);
 
+        $solution = $request->input('solution');
+        $question->solutions()->create([
+            'solution' => $solution,
+            'user_id' => Auth::id()
+        ]);
+
+        $result = "App\Models\\" . $solution;   // updates solution and based on that, gets $data
+        $data = eval("return $result");
+
         return response(
-            ['message' => 'Question saved'],
+            [
+                'message' => 'Question saved',
+                'data' => $data
+            ],
             200
         );
     }
@@ -65,7 +68,6 @@ class QuestionsController extends Controller
 
         return response(
             ['question' => $question],
-            200
         );
     }
 
@@ -78,22 +80,22 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $question = Question::findOrFail($id);
+        // $question = Question::findOrFail($id);
 
-        $solution = $request->input('solution');
-        $result = "App\Models\\" . $solution;   // updates solution and based on that, gets $data
-        $data = eval("return $result");
+        // $solution = $request->input('solution');
+        // $result = "App\Models\\" . $solution;   // updates solution and based on that, gets $data
+        // $data = eval("return $result");
 
-        $question->update([
-            'title' => $request->input('title'),
-            'solution' => $solution,
-            'data' => $data
-        ]);
+        // $question->update([
+        //     'title' => $request->input('title'),
+        //     'solution' => $solution,
+        //     'data' => $data
+        // ]);
 
-        return response(
-            ['message' => 'Updated successfully'],
-            200
-        );
+        // return response(
+        //     ['message' => 'Updated successfully'],
+        //     200
+        // );
     }
 
     /**
@@ -104,7 +106,8 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        $question = Question::findOrFail($id);
+        $question =Question::findOrFail($id);
+        $question->solutions()->delete();
         $question->delete();
 
         return response(
@@ -113,4 +116,3 @@ class QuestionsController extends Controller
         );
     }
 }
-

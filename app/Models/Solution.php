@@ -2,20 +2,18 @@
 
 namespace App\Models;
 
-use App\Models\Solution;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Question extends Model
+class Solution extends Model
 {
     use HasFactory;
 
-    protected $hidden = ['timestamps'];
-
     protected $guarded = [];
 
-    public function solutions()
+    public function question()
     {
-        return $this->hasMany(Solution::class);
+        return $this->belongsTo(Question::class);
     }
 }
