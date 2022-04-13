@@ -18,7 +18,7 @@ class QuestionResource extends JsonResource
         return [
             'id' => $this->id,
             'title' => $this->title,
-            'solutions' => SolutionResource::collection($this->solutions),
+            'solutions' => new SolutionResource($this->solution),
         ];
     }
 }

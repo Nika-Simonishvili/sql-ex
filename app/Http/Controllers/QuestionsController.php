@@ -34,7 +34,7 @@ class QuestionsController extends Controller
             'title' => $request->input('title'),
         ]);
 
-        $question->solutions()->create([
+        $question->solution()->create([
             'solution' => $request->input('solution'),
             'user_id' => Auth::id(),
         ]);
@@ -79,7 +79,7 @@ class QuestionsController extends Controller
             'title' =>  $request->input('title'),
         ]);
 
-        $question->solutions()->update([
+        $question->solution()->update([
             'solution' => $request->input('solution'),
         ]);
 
@@ -95,7 +95,7 @@ class QuestionsController extends Controller
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
-        $question->solutions()->delete();
+        $question->solution()->delete();
         $question->delete();
 
         return response( ['message' => 'question deleted'] );

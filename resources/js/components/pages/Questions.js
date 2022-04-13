@@ -1,6 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import {Table, Button} from 'reactstrap'
-import ReactDOM from 'react-dom';
 import axios from "axios";
 import NewQuestionModal from "../modals/NewQuestionModal";
 import EditQuestionModal from "../modals/EditQuestionModal";
@@ -34,7 +33,7 @@ function Questions() {
     //get all questions
     const loadQuestions = () => {
         axios.get(BASE_URL)
-            .then(result => setData({...data, questions: result.data.questions}));
+            .then(result => setData( {...data, questions: result.data.questions}) )
     }
 
     useEffect(() => {
@@ -76,7 +75,6 @@ function Questions() {
         axios.put(BASE_URL + '/' + id, editQuestion)
             .then((res) => {
                 setEditQuestion(res.data);
-                console.log(id);
                 loadQuestions();
             })
             .catch(err => console.log(err));
@@ -96,7 +94,9 @@ function Questions() {
     // show result functions
     const handleResultShow = (id) => {
         axios.get(BASE_URL + '/' + id)
-            .then(res => setResult(res.data.question))
+            .then(res => {
+                setResult(res.data.data)
+            })
             .catch(err => console.log(err));
         handleResultModal();
     }
@@ -147,7 +147,7 @@ function Questions() {
                     <tr key={index}>
                         <td>{question.id}</td>
                         <td>{question.title}</td>
-                        <td>{question.solution}</td>
+                        <td>{question.solutions.solution}</td>
                         <td>
                             <Button color="success"
                                     onClick={() => handleOpenEditModal(question.id)}>Edit</Button>
