@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Table, Button} from 'reactstrap'
+import { Button } from 'reactstrap'
 import axios from "axios";
 import NewQuestionModal from "../modals/NewQuestionModal";
 import EditQuestionModal from "../modals/EditQuestionModal";
@@ -9,13 +9,13 @@ import Header from '../parts/Header';
 function Questions() {
 
     const [data, setData] = useState({
-        questionsData: {title: "", solution: "", data: ""},
+        questionsData: {title: "", solution: ""},
         questions: [],
     });
-    const [editQuestion, setEditQuestion] = useState({
-        id: "", title: "",
-        solution: "", data: "",
-    });
+    const [editQuestion, setEditQuestion] = useState([{
+        id: "", question: "",
+        solution: "",
+    }]);
 
     const [result, setResult] = useState([]);
 
@@ -29,6 +29,7 @@ function Questions() {
     });
 
     const BASE_URL = 'api/questions';
+    const username = JSON.parse(localStorage.getItem('username'));
 
     //get all questions
     const loadQuestions = () => {
@@ -48,10 +49,7 @@ function Questions() {
                     loadQuestions();
                     handleCloseModal();
                 }
-            ).catch((err) => {
-               console.log(err.response.data.message)
-                setErrors({...errors, validationErrors: err.response.data.errors});
-        });
+            ).catch((err) => setErrors( {...errors, validationErrors: err.response.data.errors} ));
     }
 
     const handleOnChange = (e) => {
@@ -76,18 +74,23 @@ function Questions() {
             .then((res) => {
                 setEditQuestion(res.data);
                 loadQuestions();
+                setEditModal(false);
             })
-            .catch(err => console.log(err));
-            setEditModal(false);
+            .catch((err) => {
+                setErrors({...errors, validationErrors: err.response.data.errors})
+                if (err?.response.status === 403) {
+                    setErrors({...errors, serverErrors: err.response.data.message});
+                }
+            });
     }
 
     const handleOpenEditModal = (id) => {
         setEditModal(true);
         axios.get(BASE_URL + '/' + id)
-            .then(res => {
-                setEditQuestion(res.data.question);
-            })
-    }
+            .then( res =>{
+                setEditQuestion(res.data)}
+            )
+        }
 
     const handleCloseEditModal = () => setEditModal(false);
 
@@ -112,27 +115,42 @@ function Questions() {
                 const newQues = data.questions.filter((elem) => data.questions.indexOf(elem) !== index);
                 setData({...data, questions: newQues});
             })
-            .catch(err => console.log(err));
+            .catch( (err) => {
+                if (err?.response.status === 403) {
+                    setErrors({...errors, serverErrors: err.response.data.message});
+                  }
+            } )
     }
 
     return (
         <>
             <Header/>
-            <h1>Questions List</h1>
-            <Button color="primary"
-                    onClick={handleOpenModal}>
-                Add question</Button>
+            <h1 className=''>Questions List</h1>
+                {!username ?(
+                        <p>Please, Login or Register to add a new question.</p>
+                        ):(
+                            <>
+                            <Button color="primary"
+                                    onClick={handleOpenModal}>
+                                    Add question</Button>
 
-            <NewQuestionModal
-                isOpen={isOpen}
-                close={handleCloseModal}
-                onAddQuestion={handleNewQuestion}
-                onTitleChange={(e) => handleOnChange(e)}
-                errors={errors}
-            />
+                            <NewQuestionModal
+                                isOpen={isOpen}
+                                close={handleCloseModal}
+                                onAddQuestion={handleNewQuestion}
+                                onTitleChange={(e) => handleOnChange(e)}
+                                errors={errors}
+                            />
+                            </>
+                        )
+                }
 
-            <Table>
-                <thead>
+                <h4 className='text-danger'>
+                    {errors.serverErrors}
+                </h4>
+
+            <table className='table'>
+                <thead className='table-dark'>
                 <tr>
                     <th>#</th>
                     <th>Question</th>
@@ -153,9 +171,10 @@ function Questions() {
                                     onClick={() => handleOpenEditModal(question.id)}>Edit</Button>
 
                             <EditQuestionModal open={editModal}
-                                               state={editQuestion} setState={setEditQuestion}
-                                               handleSubmit={() => handleEdit(editQuestion.id)}
-                                               close={handleCloseEditModal}
+                                            state={editQuestion} setState={setEditQuestion}
+                                            handleSubmit={() => handleEdit(question.id)}
+                                            errors={errors}
+                                            close={handleCloseEditModal}
                             />
                         </td>
                         <td>
@@ -175,7 +194,7 @@ function Questions() {
                     </tr>
                 ))}
                 </tbody>
-            </Table>
+            </table>
         </>
     )
 }

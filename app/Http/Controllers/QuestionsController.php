@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreQuestionRequest;
+use App\Http\Requests\QuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use App\Models\Solution;
@@ -28,7 +28,7 @@ class QuestionsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return string
      */
-    public function store(StoreQuestionRequest $request)
+    public function store(QuestionRequest $request)
     {
         $question = Question::create([
             'title' => $request->input('title'),
@@ -50,7 +50,7 @@ class QuestionsController extends Controller
      */
     public function show($id)
     {
-        $question = Question::findOrFail($id);
+        $question = new QuestionResource(Question::findOrFail($id));
         $solution = Solution::where('question_id', $question->id)->value('solution');
 
         $result = "App\\Models\\" . $solution;   // updates solution and based on that, gets $data
@@ -72,18 +72,22 @@ class QuestionsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(StoreQuestionRequest $request, $id)
+    public function update(QuestionRequest $request, $id)
     {
         $question = Question::findOrFail($id);
-        $question->update([
-            'title' =>  $request->input('title'),
-        ]);
+        if ($question->solution->user_id == Auth::id()) {
+            $question->update([
+                'title' =>  $request->input('title'),
+            ]);
+            $question->solution()->update([
+                'solution' => $request->input('solution'),
+            ]);
 
-        $question->solution()->update([
-            'solution' => $request->input('solution'),
-        ]);
+            return response( ['message' => 'Updated successfully'] );
+        }
 
-        return response( ['message' => 'Updated successfully'] );
+        return response(['message' => 'Solution is not yours!'], 403);
+
     }
 
     /**
@@ -95,9 +99,12 @@ class QuestionsController extends Controller
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
-        $question->solution()->delete();
-        $question->delete();
+        if ($question->solution->user_id == Auth::id()) {
+            $question->solution()->delete();
+            $question->delete();
+            return response( ['message' => 'question deleted'] );
+        }
 
-        return response( ['message' => 'question deleted'] );
+        return response(['message' => 'Solution is not yours!'], 403);
     }
 }

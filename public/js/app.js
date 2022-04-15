@@ -5376,11 +5376,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var EditQuestionModal = function EditQuestionModal(_ref) {
+  var _state$question;
+
   var open = _ref.open,
       state = _ref.state,
       setState = _ref.setState,
       close = _ref.close,
-      handleSubmit = _ref.handleSubmit;
+      handleSubmit = _ref.handleSubmit,
+      errors = _ref.errors;
 
   var handleEditOnChange = function handleEditOnChange(e) {
     var _e$target = e.target,
@@ -5401,9 +5404,13 @@ var EditQuestionModal = function EditQuestionModal(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "title",
           name: "title",
-          value: state.title,
+          type: "textarea",
+          defaultValue: state === null || state === void 0 ? void 0 : (_state$question = state.question) === null || _state$question === void 0 ? void 0 : _state$question.title,
           onChange: handleEditOnChange
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "text-danger",
+        children: errors.validationErrors.title
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
           "for": "solution",
@@ -5411,9 +5418,13 @@ var EditQuestionModal = function EditQuestionModal(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "solution",
           name: "solution",
+          type: "textarea",
           value: state.solution,
           onChange: handleEditOnChange
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "text-danger",
+        children: errors.validationErrors.solution
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
@@ -5472,6 +5483,7 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "title",
+          type: "textarea",
           name: "title",
           onChange: onTitleChange
         })]
@@ -5485,6 +5497,7 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
             children: "Eloquent solution"
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
+          type: "textarea",
           id: "solution",
           name: "solution",
           onChange: onTitleChange
@@ -5522,11 +5535,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
-/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -5544,31 +5555,45 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 var ShowResultModal = function ShowResultModal(_ref) {
   var isOpen = _ref.isOpen,
       data = _ref.data,
       setIsOpen = _ref.setIsOpen;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.Modal, {
+  var headers = data[0] ? Object.keys(data[0]) : [];
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Modal, {
     isOpen: isOpen,
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.ModalHeader, {
-      children: "data:"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.ModalBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("ul", {
-        children: data.map(function (item) {
-          return Object.entries(item).map(function (_ref2) {
-            var _ref3 = _slicedToArray(_ref2, 2),
-                property = _ref3[0],
-                value = _ref3[1];
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalHeader, {
+      children: "Data:"
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalBody, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("table", {
+        className: "table table-striped",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("thead", {
+          className: "table-dark",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+            children: headers.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
+                children: item
+              }, index);
+            })
+          })
+        }), data.map(function (item, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tbody", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+              children: Object.entries(item).map(function (_ref2) {
+                var _ref3 = _slicedToArray(_ref2, 2),
+                    property = _ref3[0],
+                    value = _ref3[1];
 
-            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("li", {
-              children: [property, " : ", value]
-            }, property);
-          });
-        })
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
+                  children: value
+                }, property);
+              })
+            }, index)
+          }, index);
+        })]
       })
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.ModalFooter, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.Button, {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
         color: "secondary",
         onClick: function onClick() {
           return setIsOpen(isOpen);
@@ -5636,8 +5661,7 @@ function Questions() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     questionsData: {
       title: "",
-      solution: "",
-      data: ""
+      solution: ""
     },
     questions: []
   }),
@@ -5645,12 +5669,11 @@ function Questions() {
       data = _useState2[0],
       setData = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
     id: "",
-    title: "",
-    solution: "",
-    data: ""
-  }),
+    question: "",
+    solution: ""
+  }]),
       _useState4 = _slicedToArray(_useState3, 2),
       editQuestion = _useState4[0],
       setEditQuestion = _useState4[1];
@@ -5683,7 +5706,8 @@ function Questions() {
       errors = _useState14[0],
       setErrors = _useState14[1];
 
-  var BASE_URL = 'api/questions'; //get all questions
+  var BASE_URL = 'api/questions';
+  var username = JSON.parse(localStorage.getItem('username')); //get all questions
 
   var loadQuestions = function loadQuestions() {
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(BASE_URL).then(function (result) {
@@ -5705,8 +5729,7 @@ function Questions() {
       loadQuestions();
       handleCloseModal();
     })["catch"](function (err) {
-      console.log(err.response.data.message);
-      setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+      return setErrors(_objectSpread(_objectSpread({}, errors), {}, {
         validationErrors: err.response.data.errors
       }));
     });
@@ -5735,16 +5758,24 @@ function Questions() {
     axios__WEBPACK_IMPORTED_MODULE_1___default().put(BASE_URL + '/' + id, editQuestion).then(function (res) {
       setEditQuestion(res.data);
       loadQuestions();
+      setEditModal(false);
     })["catch"](function (err) {
-      return console.log(err);
+      setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+        validationErrors: err.response.data.errors
+      }));
+
+      if ((err === null || err === void 0 ? void 0 : err.response.status) === 403) {
+        setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+          serverErrors: err.response.data.message
+        }));
+      }
     });
-    setEditModal(false);
   };
 
   var handleOpenEditModal = function handleOpenEditModal(id) {
     setEditModal(true);
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(BASE_URL + '/' + id).then(function (res) {
-      setEditQuestion(res.data.question);
+      setEditQuestion(res.data);
     });
   };
 
@@ -5776,27 +5807,41 @@ function Questions() {
         questions: newQues
       }));
     })["catch"](function (err) {
-      return console.log(err);
+      if ((err === null || err === void 0 ? void 0 : err.response.status) === 403) {
+        setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+          serverErrors: err.response.data.message
+        }));
+      }
     });
   };
 
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_Header__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
+      className: "",
       children: "Questions List"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
-      color: "primary",
-      onClick: handleOpenModal,
-      children: "Add question"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_modals_NewQuestionModal__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      isOpen: isOpen,
-      close: handleCloseModal,
-      onAddQuestion: handleNewQuestion,
-      onTitleChange: function onTitleChange(e) {
-        return handleOnChange(e);
-      },
-      errors: errors
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Table, {
+    }), !username ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+      children: "Please, Login or Register to add a new question."
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+        color: "primary",
+        onClick: handleOpenModal,
+        children: "Add question"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_modals_NewQuestionModal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        isOpen: isOpen,
+        close: handleCloseModal,
+        onAddQuestion: handleNewQuestion,
+        onTitleChange: function onTitleChange(e) {
+          return handleOnChange(e);
+        },
+        errors: errors
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+      className: "text-danger",
+      children: errors.serverErrors
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("table", {
+      className: "table",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("thead", {
+        className: "table-dark",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "#"
@@ -5833,8 +5878,9 @@ function Questions() {
                 state: editQuestion,
                 setState: setEditQuestion,
                 handleSubmit: function handleSubmit() {
-                  return handleEdit(editQuestion.id);
+                  return handleEdit(question.id);
                 },
+                errors: errors,
                 close: handleCloseEditModal
               })]
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {

@@ -1,9 +1,8 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\QuestionsController;
-use App\Http\Controllers\SolutionController;
+use App\Http\Controllers\Api\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +15,18 @@ use App\Http\Controllers\SolutionController;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
+//auth routes
+Route::controller(AuthController::class)->group( function () {
+    Route::post('login', 'login');
+    Route::post('register', 'register');
+    Route::post('logout', 'logout')->middleware('auth:sanctum');
+});
 
-Route::post('login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
-Route::post('register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
-
-Route::middleware('auth:sanctum')->group( function() {
-    Route::post('logout', [\App\Http\Controllers\Api\AuthController::class, 'logout']);
-    Route::post('questions', [QuestionsController::class, 'store']);
-    Route::put('questions/{id}', [QuestionsController::class, 'update']);
-    Route::delete('questions/{id}', [QuestionsController::class, 'destroy']);
+//question's protected routes
+Route::middleware('auth:sanctum')->controller(QuestionsController::class)->group( function() {
+    Route::post('questions', 'store');
+    Route::put('questions/{id}', 'update');
+    Route::delete('questions/{id}',  'destroy');
 });
 
 Route::get('questions', [QuestionsController::class, 'index']);

@@ -15,7 +15,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 </head>
 
-<body style="background-color:lavender">
+<body style="background-color:#EAEDED">
     <div id="app">
 
     </div>
