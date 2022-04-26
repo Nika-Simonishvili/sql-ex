@@ -5711,7 +5711,8 @@ function Questions() {
 
   var loadQuestions = function loadQuestions() {
     axios__WEBPACK_IMPORTED_MODULE_1___default().get(BASE_URL).then(function (result) {
-      return setData(_objectSpread(_objectSpread({}, data), {}, {
+      console.log(result.data);
+      setData(_objectSpread(_objectSpread({}, data), {}, {
         questions: result.data.questions
       }));
     });

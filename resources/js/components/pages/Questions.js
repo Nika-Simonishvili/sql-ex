@@ -34,7 +34,10 @@ function Questions() {
     //get all questions
     const loadQuestions = () => {
         axios.get(BASE_URL)
-            .then(result => setData( {...data, questions: result.data.questions}) )
+            .then(result => {
+                console.log(result.data);
+                setData( {...data, questions: result.data.questions})
+            } )
     }
 
     useEffect(() => {

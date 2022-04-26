@@ -13,8 +13,8 @@ class Question extends Model
     protected $guarded = [];
     protected $hidden = ['id', 'created_at', 'updated_at'];
 
-    public function solution()
+    public function solutions()
     {
-        return $this->hasOne(Solution::class);
+        return $this->hasMany(Solution::class);
     }
 }

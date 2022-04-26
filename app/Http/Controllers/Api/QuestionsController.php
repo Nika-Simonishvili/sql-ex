@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\QuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use App\Models\Solution;
 use Illuminate\Support\Facades\Auth;
+
+use function response;
 
 class QuestionsController extends Controller
 {
@@ -17,9 +20,7 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $questions = QuestionResource::collection(Question::all());  // get all questions
-
-        return response( ['questions' => $questions] );
+        return response(['questions' => QuestionResource::collection(Question::all())]);
     }
 
     /**
@@ -30,16 +31,27 @@ class QuestionsController extends Controller
      */
     public function store(QuestionRequest $request)
     {
+        try {
+            $result = "App\\Models\\" . $request->input('solution');
+            eval("return $result");
+        } catch (\Throwable $error) {
+            return response([
+                'errors' => [
+                    'solution' => $error->getMessage(),
+                ],
+            ], 422);
+        }
+
         $question = Question::create([
             'title' => $request->input('title'),
         ]);
 
-        $question->solution()->create([
+        $question->solutions()->create([
             'solution' => $request->input('solution'),
             'user_id' => Auth::id(),
         ]);
 
-        return response( ['message' => 'Question saved'] );
+        return response(['message' => 'Question saved']);
     }
 
     /**
@@ -59,7 +71,6 @@ class QuestionsController extends Controller
         return response(
             [
                 'question' => $question,
-                'solution' => $solution,
                 'data' => $data
             ]
         );
@@ -74,20 +85,31 @@ class QuestionsController extends Controller
      */
     public function update(QuestionRequest $request, $id)
     {
+        try {
+            $result = "App\\Models\\" . $request->input('solution');;
+            eval("return $result");
+        } catch (\Throwable $error) {
+            return response([
+                'errors' => [
+                    'solution' => $error->getMessage(),
+                ],
+            ], 422);
+        }
         $question = Question::findOrFail($id);
-        if ($question->solution->user_id == Auth::id()) {
+        $solution = Solution::where('question_id', $question->id)->first();
+
+        if ($solution->user_id == Auth::id()) {
             $question->update([
-                'title' =>  $request->input('title'),
+                'title' => $request->input('title'),
             ]);
-            $question->solution()->update([
+            $solution->update([
                 'solution' => $request->input('solution'),
             ]);
 
-            return response( ['message' => 'Updated successfully'] );
+            return response(['message' => 'Updated successfully']);
         }
 
-        return response(['message' => 'Solution is not yours!'], 403);
-
+        return response(['server_error' => 'Solution is not yours!'], 403);
     }
 
     /**
@@ -99,10 +121,11 @@ class QuestionsController extends Controller
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
-        if ($question->solution->user_id == Auth::id()) {
-            $question->solution()->delete();
+        $solution = Solution::where('question_id', $question->id)->first();
+
+        if ($solution->user_id == Auth::id()) {
             $question->delete();
-            return response( ['message' => 'question deleted'] );
+            return response(['message' => 'Question deleted']);
         }
 
         return response(['message' => 'Solution is not yours!'], 403);

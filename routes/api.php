@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\QuestionsController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\QuestionsController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
