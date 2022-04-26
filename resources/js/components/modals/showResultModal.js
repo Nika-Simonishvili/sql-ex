@@ -3,26 +3,32 @@ import {Button, Modal, ModalHeader, ModalBody, ModalFooter, Table} from 'reactst
 
 const ShowResultModal = ({isOpen, data, setIsOpen}) => {
 
+    const headers = data[0] ? Object.keys(data[0]) : [];
+
     return (
         <Modal isOpen={isOpen}>
-            <ModalHeader>data:</ModalHeader>
+            <ModalHeader>Data:</ModalHeader>
             <ModalBody>
-                <Table variant="table">
-                    <tbody>
-                    <tr>
-                        <th>Question:</th>
-                        <td>{data.title}</td>
-                    </tr>
-                    <tr>
-                        <th>Eloquent Solution:</th>
-                        <td>{data.solution}</td>
-                    </tr>
-                    <tr>
-                        <th>Data:</th>
-                        <td>{data.data}</td>
-                    </tr>
-                    </tbody>
-                </Table>
+                    <table className="table table-striped">
+                        <thead className='table-dark'>
+                            <tr>
+                                {headers.map((item, index) => (
+                                    <th key={index}>{item}</th>
+                                ))}
+                            </tr>
+                        </thead>
+
+                        {data.map((item, index) => (
+                        <tbody key={index}>
+                            <tr key={index}>
+                                {Object.entries(item).map(([property, value]) => (
+                                <td key={property}>{value}</td>
+                                ))}
+                            </tr>
+                        </tbody>
+                        ))}
+                    </table>
+
             </ModalBody>
             <ModalFooter>
                 <Button color="secondary" onClick={() => setIsOpen(isOpen)}>Cancel</Button>

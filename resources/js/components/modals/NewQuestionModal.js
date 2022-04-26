@@ -10,7 +10,8 @@ const NewQuestionModal = ({ isOpen, close, onAddQuestion, onTitleChange, errors}
 
                 <FormGroup>
                     <Label for="title"><h6>Question</h6></Label>
-                    <Input id="title" name="title"
+                    <Input id="title" type="textarea"
+                           name="title"
                            onChange={onTitleChange}
                     />
                 </FormGroup>
@@ -21,7 +22,8 @@ const NewQuestionModal = ({ isOpen, close, onAddQuestion, onTitleChange, errors}
 
                 <FormGroup>
                     <Label for="solution"><h6>Eloquent solution</h6></Label>
-                    <Input id="solution" name="solution"
+                    <Input type="textarea" id="solution"
+                           name="solution"
                            onChange={onTitleChange}
                     />
                 </FormGroup>

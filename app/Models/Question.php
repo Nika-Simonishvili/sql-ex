@@ -2,14 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Solution;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Question extends Model
 {
     use HasFactory;
 
-    protected $hidden = ['timestamps'];
+    protected $guarded = [];
+    protected $hidden = ['id', 'created_at', 'updated_at'];
 
-    protected $fillable = ['title', 'solution', 'data'];
+    public function solutions()
+    {
+        return $this->hasMany(Solution::class);
+    }
 }

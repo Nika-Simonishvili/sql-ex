@@ -5376,11 +5376,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var EditQuestionModal = function EditQuestionModal(_ref) {
+  var _state$question;
+
   var open = _ref.open,
       state = _ref.state,
       setState = _ref.setState,
       close = _ref.close,
-      handleSubmit = _ref.handleSubmit;
+      handleSubmit = _ref.handleSubmit,
+      errors = _ref.errors;
 
   var handleEditOnChange = function handleEditOnChange(e) {
     var _e$target = e.target,
@@ -5401,9 +5404,13 @@ var EditQuestionModal = function EditQuestionModal(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "title",
           name: "title",
-          value: state.title,
+          type: "textarea",
+          defaultValue: state === null || state === void 0 ? void 0 : (_state$question = state.question) === null || _state$question === void 0 ? void 0 : _state$question.title,
           onChange: handleEditOnChange
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "text-danger",
+        children: errors.validationErrors.title
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.FormGroup, {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Label, {
           "for": "solution",
@@ -5411,9 +5418,13 @@ var EditQuestionModal = function EditQuestionModal(_ref) {
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "solution",
           name: "solution",
+          type: "textarea",
           value: state.solution,
           onChange: handleEditOnChange
         })]
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("p", {
+        className: "text-danger",
+        children: errors.validationErrors.solution
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
@@ -5472,6 +5483,7 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
           id: "title",
+          type: "textarea",
           name: "title",
           onChange: onTitleChange
         })]
@@ -5485,6 +5497,7 @@ var NewQuestionModal = function NewQuestionModal(_ref) {
             children: "Eloquent solution"
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Input, {
+          type: "textarea",
           id: "solution",
           name: "solution",
           onChange: onTitleChange
@@ -5525,6 +5538,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"]; if (_i == null) return; var _arr = []; var _n = true; var _d = false; var _s, _e; try { for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -5534,34 +5559,38 @@ var ShowResultModal = function ShowResultModal(_ref) {
   var isOpen = _ref.isOpen,
       data = _ref.data,
       setIsOpen = _ref.setIsOpen;
+  var headers = data[0] ? Object.keys(data[0]) : [];
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Modal, {
     isOpen: isOpen,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalHeader, {
-      children: "data:"
+      children: "Data:"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalBody, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Table, {
-        variant: "table",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tbody", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-              children: "Question:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
-              children: data.title
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-              children: "Eloquent Solution:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
-              children: data.solution
-            })]
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
-              children: "Data:"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
-              children: data.data
-            })]
-          })]
-        })
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("table", {
+        className: "table table-striped",
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("thead", {
+          className: "table-dark",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+            children: headers.map(function (item, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("th", {
+                children: item
+              }, index);
+            })
+          })
+        }), data.map(function (item, index) {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tbody", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("tr", {
+              children: Object.entries(item).map(function (_ref2) {
+                var _ref3 = _slicedToArray(_ref2, 2),
+                    property = _ref3[0],
+                    value = _ref3[1];
+
+                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("td", {
+                  children: value
+                }, property);
+              })
+            }, index)
+          }, index);
+        })]
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.ModalFooter, {
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_2__.Button, {
@@ -5591,15 +5620,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _modals_NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/NewQuestionModal */ "./resources/js/components/modals/NewQuestionModal.js");
-/* harmony import */ var _modals_EditQuestionModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/EditQuestionModal */ "./resources/js/components/modals/EditQuestionModal.js");
-/* harmony import */ var _modals_showResultModal__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../modals/showResultModal */ "./resources/js/components/modals/showResultModal.js");
-/* harmony import */ var _parts_Header__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../parts/Header */ "./resources/js/components/parts/Header.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var reactstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! reactstrap */ "./node_modules/reactstrap/dist/reactstrap.modern.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _modals_NewQuestionModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modals/NewQuestionModal */ "./resources/js/components/modals/NewQuestionModal.js");
+/* harmony import */ var _modals_EditQuestionModal__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../modals/EditQuestionModal */ "./resources/js/components/modals/EditQuestionModal.js");
+/* harmony import */ var _modals_showResultModal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../modals/showResultModal */ "./resources/js/components/modals/showResultModal.js");
+/* harmony import */ var _parts_Header__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../parts/Header */ "./resources/js/components/parts/Header.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { _defineProperty(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
@@ -5629,13 +5657,11 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function Questions() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
     questionsData: {
       title: "",
-      solution: "",
-      data: ""
+      solution: ""
     },
     questions: []
   }),
@@ -5643,12 +5669,11 @@ function Questions() {
       data = _useState2[0],
       setData = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)({
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)([{
     id: "",
-    title: "",
-    solution: "",
-    data: ""
-  }),
+    question: "",
+    solution: ""
+  }]),
       _useState4 = _slicedToArray(_useState3, 2),
       editQuestion = _useState4[0],
       setEditQuestion = _useState4[1];
@@ -5681,11 +5706,13 @@ function Questions() {
       errors = _useState14[0],
       setErrors = _useState14[1];
 
-  var BASE_URL = 'api/questions'; //get all questions
+  var BASE_URL = 'api/questions';
+  var username = JSON.parse(localStorage.getItem('username')); //get all questions
 
   var loadQuestions = function loadQuestions() {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL).then(function (result) {
-      return setData(_objectSpread(_objectSpread({}, data), {}, {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get(BASE_URL).then(function (result) {
+      console.log(result.data);
+      setData(_objectSpread(_objectSpread({}, data), {}, {
         questions: result.data.questions
       }));
     });
@@ -5696,15 +5723,14 @@ function Questions() {
   }, []); // new question functions
 
   var handleNewQuestion = function handleNewQuestion() {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().post(BASE_URL, data.questionsData).then(function (response) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().post(BASE_URL, data.questionsData).then(function (response) {
       setData(_objectSpread(_objectSpread({}, data), {}, {
         questionsData: response.data
       }));
       loadQuestions();
       handleCloseModal();
     })["catch"](function (err) {
-      console.log(err.response.data.message);
-      setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+      return setErrors(_objectSpread(_objectSpread({}, errors), {}, {
         validationErrors: err.response.data.errors
       }));
     });
@@ -5730,20 +5756,27 @@ function Questions() {
 
 
   var handleEdit = function handleEdit(id) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().put(BASE_URL + '/' + id, editQuestion).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default().put(BASE_URL + '/' + id, editQuestion).then(function (res) {
       setEditQuestion(res.data);
-      console.log(id);
       loadQuestions();
+      setEditModal(false);
     })["catch"](function (err) {
-      return console.log(err);
+      setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+        validationErrors: err.response.data.errors
+      }));
+
+      if ((err === null || err === void 0 ? void 0 : err.response.status) === 403) {
+        setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+          serverErrors: err.response.data.message
+        }));
+      }
     });
-    setEditModal(false);
   };
 
   var handleOpenEditModal = function handleOpenEditModal(id) {
     setEditModal(true);
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL + '/' + id).then(function (res) {
-      setEditQuestion(res.data.question);
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get(BASE_URL + '/' + id).then(function (res) {
+      setEditQuestion(res.data);
     });
   };
 
@@ -5753,8 +5786,8 @@ function Questions() {
 
 
   var handleResultShow = function handleResultShow(id) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default().get(BASE_URL + '/' + id).then(function (res) {
-      return setResult(res.data.question);
+    axios__WEBPACK_IMPORTED_MODULE_1___default().get(BASE_URL + '/' + id).then(function (res) {
+      setResult(res.data.data);
     })["catch"](function (err) {
       return console.log(err);
     });
@@ -5767,7 +5800,7 @@ function Questions() {
 
 
   var handleDelete = function handleDelete(id, index) {
-    axios__WEBPACK_IMPORTED_MODULE_2___default()["delete"](BASE_URL + '/' + id).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_1___default()["delete"](BASE_URL + '/' + id).then(function (res) {
       var newQues = data.questions.filter(function (elem) {
         return data.questions.indexOf(elem) !== index;
       });
@@ -5775,83 +5808,98 @@ function Questions() {
         questions: newQues
       }));
     })["catch"](function (err) {
-      return console.log(err);
+      if ((err === null || err === void 0 ? void 0 : err.response.status) === 403) {
+        setErrors(_objectSpread(_objectSpread({}, errors), {}, {
+          serverErrors: err.response.data.message
+        }));
+      }
     });
   };
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_parts_Header__WEBPACK_IMPORTED_MODULE_6__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h1", {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_parts_Header__WEBPACK_IMPORTED_MODULE_5__["default"], {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h1", {
+      className: "",
       children: "Questions List"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_8__.Button, {
-      color: "primary",
-      onClick: handleOpenModal,
-      children: "Add question"
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_modals_NewQuestionModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
-      isOpen: isOpen,
-      close: handleCloseModal,
-      onAddQuestion: handleNewQuestion,
-      onTitleChange: function onTitleChange(e) {
-        return handleOnChange(e);
-      },
-      errors: errors
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(reactstrap__WEBPACK_IMPORTED_MODULE_8__.Table, {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("thead", {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+    }), !username ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("p", {
+      children: "Please, Login or Register to add a new question."
+    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
+        color: "primary",
+        onClick: handleOpenModal,
+        children: "Add question"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_modals_NewQuestionModal__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        isOpen: isOpen,
+        close: handleCloseModal,
+        onAddQuestion: handleNewQuestion,
+        onTitleChange: function onTitleChange(e) {
+          return handleOnChange(e);
+        },
+        errors: errors
+      })]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h4", {
+      className: "text-danger",
+      children: errors.serverErrors
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("table", {
+      className: "table",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("thead", {
+        className: "table-dark",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "#"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "Question"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "Eloquent Solution"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "Edit"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "Delete"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("th", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("th", {
             children: "Run"
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("tbody", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("tbody", {
         children: data.questions.map(function (question, index) {
-          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("tr", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+          return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("tr", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
               children: question.id
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
               children: question.title
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-              children: question.solution
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_8__.Button, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+              children: question.solutions.solution
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "success",
                 onClick: function onClick() {
                   return handleOpenEditModal(question.id);
                 },
                 children: "Edit"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_modals_EditQuestionModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_modals_EditQuestionModal__WEBPACK_IMPORTED_MODULE_3__["default"], {
                 open: editModal,
                 state: editQuestion,
                 setState: setEditQuestion,
                 handleSubmit: function handleSubmit() {
-                  return handleEdit(editQuestion.id);
+                  return handleEdit(question.id);
                 },
+                errors: errors,
                 close: handleCloseEditModal
               })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("td", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_8__.Button, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("td", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "danger",
                 onClick: function onClick() {
                   return handleDelete(question.id, index);
                 },
                 children: "Delete"
               })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("td", {
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_8__.Button, {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("td", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_7__.Button, {
                 color: "primary",
                 onClick: function onClick() {
                   return handleResultShow(question.id);
                 },
                 children: "Run"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_modals_showResultModal__WEBPACK_IMPORTED_MODULE_5__["default"], {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_modals_showResultModal__WEBPACK_IMPORTED_MODULE_4__["default"], {
                 setIsOpen: handleResultModal,
                 isOpen: openResultModal,
                 data: result
@@ -6194,7 +6242,9 @@ function Header() {
     dark: true,
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.NavbarBrand, {
       href: "/",
-      children: username
+      children: username ? username : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+        children: "Laravel Eloquent exercises"
+      })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(reactstrap__WEBPACK_IMPORTED_MODULE_3__.NavbarToggler, {
       onClick: function onClick() {
         setIsOpen(!isOpen);
@@ -6237,10 +6287,10 @@ function Header() {
 
 /***/ }),
 
-/***/ "./resources/js/components/routes/Checker.js":
-/*!***************************************************!*\
-  !*** ./resources/js/components/routes/Checker.js ***!
-  \***************************************************/
+/***/ "./resources/js/components/routes/Checker.jsx":
+/*!****************************************************!*\
+  !*** ./resources/js/components/routes/Checker.jsx ***!
+  \****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -6331,7 +6381,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _pages_auth_Login__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../pages/auth/Login */ "./resources/js/components/pages/auth/Login.jsx");
 /* harmony import */ var _pages_auth_Logout__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../pages/auth/Logout */ "./resources/js/components/pages/auth/Logout.jsx");
 /* harmony import */ var _pages_auth_Register__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../pages/auth/Register */ "./resources/js/components/pages/auth/Register.jsx");
-/* harmony import */ var _Checker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Checker */ "./resources/js/components/routes/Checker.js");
+/* harmony import */ var _Checker__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Checker */ "./resources/js/components/routes/Checker.jsx");
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
@@ -6347,11 +6397,11 @@ function RouteManager() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Routes, {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
-        path: "/login",
-        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_auth_Login__WEBPACK_IMPORTED_MODULE_2__["default"], {})
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/register",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_auth_Register__WEBPACK_IMPORTED_MODULE_4__["default"], {})
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
+        path: "/login",
+        element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_auth_Login__WEBPACK_IMPORTED_MODULE_2__["default"], {})
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_7__.Route, {
         path: "/",
         element: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_pages_Questions__WEBPACK_IMPORTED_MODULE_1__["default"], {})

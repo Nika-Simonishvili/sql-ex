@@ -15,7 +15,7 @@ class AuthController extends Controller
     {
         $data = $request->validated();
 
-        $user = User::create([
+        User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
@@ -50,7 +50,7 @@ class AuthController extends Controller
         Auth::user()->tokens()->delete();
 
         return response([
-            'message' => 'logged  out.'
+            'message' => 'Logged  out.'
         ]);
     }
 }
