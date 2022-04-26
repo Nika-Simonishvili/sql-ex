@@ -1,12 +1,13 @@
+import React, {useState} from "react";
 import axios from "axios";
-import React from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router";
 import Header from "../../parts/Header";
 
 export default function Login() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit} = useForm();
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -20,10 +21,8 @@ export default function Login() {
             localStorage.setItem('username', JSON.stringify(res.data.user.name));
             navigate('/');
         }).catch((err) => {
-            if (err.response && err.response.status === 422) {
-              setErrors(err.response.data.errors);
-            }
-          });
+            setErrors(err)
+        })
     }
 
   return (

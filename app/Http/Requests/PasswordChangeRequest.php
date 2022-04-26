@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\Executable;
-use App\Rules\PreventDelete;
 use Illuminate\Foundation\Http\FormRequest;
 
-class QuestionRequest extends FormRequest
+class PasswordChangeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,16 +24,7 @@ class QuestionRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required',
-            'solution' => ['required', new PreventDelete, new Executable],
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'title.required' => 'Please, Enter the question!',
-            'solution.required' => 'Please, Enter the solution!',
+            'password' => 'required|confirmed|string|min:4',
         ];
     }
 }

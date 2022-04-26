@@ -35,7 +35,6 @@ function Questions() {
     const loadQuestions = () => {
         axios.get(BASE_URL)
             .then(result => {
-                console.log(result.data);
                 setData( {...data, questions: result.data.questions})
             } )
     }

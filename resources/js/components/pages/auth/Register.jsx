@@ -1,11 +1,12 @@
 import axios from "axios";
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import {useState} from "react";
+import { useNavigate} from "react-router";
 import Header from "../../parts/Header";
 
 export default function Register() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit } = useForm();
     const navigate = useNavigate()
 
     const onSubmit = data => {

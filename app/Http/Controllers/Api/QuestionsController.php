@@ -31,17 +31,6 @@ class QuestionsController extends Controller
      */
     public function store(QuestionRequest $request)
     {
-        try {
-            $result = "App\\Models\\" . $request->input('solution');
-            eval("return $result");
-        } catch (\Throwable $error) {
-            return response([
-                'errors' => [
-                    'solution' => $error->getMessage(),
-                ],
-            ], 422);
-        }
-
         $question = Question::create([
             'title' => $request->input('title'),
         ]);
@@ -65,13 +54,13 @@ class QuestionsController extends Controller
         $question = new QuestionResource(Question::findOrFail($id));
         $solution = Solution::where('question_id', $question->id)->value('solution');
 
-        $result = "App\\Models\\" . $solution;   // updates solution and based on that, gets $data
-        $data = eval("return $result");
+        $result = "App\\Models\\" . $solution;
+        $data = eval("return $result");         // evaluates given string as PHP code(Eloquent), which returns data from database.
 
         return response(
             [
                 'question' => $question,
-                'data' => $data
+                'data' => $data,
             ]
         );
     }
@@ -85,16 +74,6 @@ class QuestionsController extends Controller
      */
     public function update(QuestionRequest $request, $id)
     {
-        try {
-            $result = "App\\Models\\" . $request->input('solution');;
-            eval("return $result");
-        } catch (\Throwable $error) {
-            return response([
-                'errors' => [
-                    'solution' => $error->getMessage(),
-                ],
-            ], 422);
-        }
         $question = Question::findOrFail($id);
         $solution = Solution::where('question_id', $question->id)->first();
 
@@ -124,7 +103,7 @@ class QuestionsController extends Controller
         $solution = Solution::where('question_id', $question->id)->first();
 
         if ($solution->user_id == Auth::id()) {
-            $question->delete();
+            $question->delete();    //also deletes question's solutions
             return response(['message' => 'Question deleted']);
         }
 
