@@ -84,7 +84,6 @@ class QuestionsController extends Controller
             $solution->update([
                 'solution' => $request->input('solution'),
             ]);
-
             return response(['message' => 'Updated successfully']);
         }
 

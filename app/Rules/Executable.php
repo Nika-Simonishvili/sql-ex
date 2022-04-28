@@ -23,7 +23,7 @@ class Executable implements Rule
      * @return bool
      */
 
-    private $solutionError = 'Solution is not correct!';
+    private $solutionError;
 
     public function passes($attribute, $value)
     {

@@ -73,7 +73,7 @@ class AuthController extends Controller
      * @return string[]
      */
 
-    public function passwordChange(PasswordChangeRequest $request)
+    public function passwordChange(PasswordChangeRequest $request): array
     {
         Auth::user()->update([
             'password' => Hash::make($request->password),

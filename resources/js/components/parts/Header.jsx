@@ -27,18 +27,23 @@ function Header() {
 							<NavLink href="/">Questions</NavLink>
 						</NavItem>
                         {!username ?(
-                        <>
-                        <NavItem>
-							<NavLink href="/register">Register</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink href="/login">Login</NavLink>
-						</NavItem>
-                        </>
+                            <>
+                                <NavItem>
+                                    <NavLink href="/register">Register</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href="/login">Login</NavLink>
+                                </NavItem>
+                            </>
                         ):(
-                        <NavItem>
-							<NavLink href="/logout">Logout</NavLink>
-						</NavItem>
+                            <>
+                                <NavItem>
+                                    <NavLink href="/password-change">Change password</NavLink>
+                                </NavItem>
+                                <NavItem>
+                                    <NavLink href="/logout">Logout</NavLink>
+                                </NavItem>
+                            </>
                         )}
 						</Nav>
 				</Collapse>
