@@ -3,21 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
-use App\Http\Requests\PasswordChangeRequest;
-use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\auth\LoginRequest;
+use App\Http\Requests\auth\PasswordChangeRequest;
+use App\Http\Requests\auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Mockery\Generator\StringManipulation\Pass\Pass;
 
 class AuthController extends Controller
 {
-    /**
-     * @param RegisterRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
-
     public function register(RegisterRequest $request)
     {
         $data = $request->validated();
@@ -32,11 +26,6 @@ class AuthController extends Controller
             'message' => 'Registered successfully'
         ]);
     }
-
-    /**
-     * @param LoginRequest $request
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\Response
-     */
 
     public function login(LoginRequest $request)
     {

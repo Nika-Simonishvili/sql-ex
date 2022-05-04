@@ -1,44 +1,60 @@
-import React  from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap'
+import React, {useEffect, useState} from 'react';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
+import axios from "axios";
+import {useForm} from "react-hook-form";
+import TextArea from "../parts/TextArea";
 
-const NewQuestionModal = ({ isOpen, close, onAddQuestion, onTitleChange, errors}) => {
+const BASE_URL = 'api/questions';
 
-    return(
-        <Modal isOpen={isOpen}>
-            <ModalHeader toggle={close}>Add a new question</ModalHeader>
-            <ModalBody>
+const EditQuestionModal = ({openNewQuestionModal, setOpenNewQuestionModal, setDataChange}) => {
+  const [errors, setErrors] = useState({});
+  const [data, setData] = useState({
+    title: "",
+    solution:"",
+  })
 
-                <FormGroup>
-                    <Label for="title"><h6>Question</h6></Label>
-                    <Input id="title" type="textarea"
-                           name="title"
-                           onChange={onTitleChange}
-                    />
-                </FormGroup>
+  const {handleSubmit, control} = useForm();
 
-                <p className='text-danger'>
-                    {errors.validationErrors.title}
-                </p>
+  const onSubmit = data => {
+    axios.post(BASE_URL, data).then((res) => {
+      setData(res.data);
+      setDataChange(true);
+      setOpenNewQuestionModal(false);
+    }).catch((err) => {
+      if (err?.response.status === 422) {
+        console.log(err.response.data.errors);
+        setErrors(err.response.data.errors);
+      }
+    });
+  }
 
-                <FormGroup>
-                    <Label for="solution"><h6>Eloquent solution</h6></Label>
-                    <Input type="textarea" id="solution"
-                           name="solution"
-                           onChange={onTitleChange}
-                    />
-                </FormGroup>
+  return (
+    <Modal isOpen={openNewQuestionModal}>
+      <ModalHeader>New question</ModalHeader>
+      <ModalBody>
+        <form>
+          <TextArea
+            control={control}
+            label="Question:"
+            name="title"
+          />
+          <p className='text-danger'> {errors.title} </p>
 
-                <p className='text-danger'>
-                    {errors.validationErrors.solution}
-                </p>
+          <TextArea
+            control={control}
+            name="solution"
+            label="Solution:"
+          />
+          <p className='text-danger'> {errors.solution} </p>
 
-            </ModalBody>
-            <ModalFooter>
-                <Button color="primary" onClick={onAddQuestion}>Add question</Button>
-                <Button color="secondary" onClick={close}>Cancel</Button>
-            </ModalFooter>
-        </Modal>
-    )
+        </form>
+      </ModalBody>
+      <ModalFooter>
+        <Button type="submit" color="primary" onClick={handleSubmit(onSubmit)}>Add Question</Button>
+        <Button color="secondary" onClick={() => setOpenNewQuestionModal(false)}>Cancel</Button>
+      </ModalFooter>
+    </Modal>
+  )
 }
 
-export default NewQuestionModal;
+export default EditQuestionModal;

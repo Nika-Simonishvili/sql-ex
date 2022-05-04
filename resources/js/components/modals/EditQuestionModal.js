@@ -1,50 +1,63 @@
-import React  from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Input, Label } from 'reactstrap'
+import React, {useEffect, useState} from 'react';
+import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap'
+import axios from "axios";
+import {useForm} from "react-hook-form";
+import TextArea from "../parts/TextArea";
 
-const EditQuestionModal = ({open, state, setState, close, handleSubmit, errors}) => {
+const BASE_URL = 'api/questions';
 
-    const handleEditOnChange = (e) => {
-        const {name, value} = e.target;
-        setState({...state, [name]: value});
+const EditQuestionModal = ({questionId, showEditModal, setShowEditModal, setDataChange}) => {
+  const [errors, setErrors] = useState({});
+
+  const {handleSubmit, reset, control} = useForm();
+
+  useEffect(() => {
+    if (questionId && showEditModal) {
+      axios.get(`${BASE_URL}/${questionId}/edit`).then((response) => {
+        reset(response.data.question);
+      });
     }
-    return(
-        <Modal isOpen={open}>
-            <ModalHeader>Edit question</ModalHeader>
-            <ModalBody>
+  }, [questionId]);
 
-                <FormGroup>
-                    <Label for="title">Question</Label>
-                    <Input id="title" name="title"
-                           type="textarea"
-                           defaultValue={state?.question?.title}
-                           onChange={handleEditOnChange}
-                    />
-                </FormGroup>
+  const onSubmit = data => {
+    axios.put(`${BASE_URL}/${questionId}`, data)
+      .then((res) => {
+        setDataChange(true);
+        setShowEditModal(false);
+      }).catch((err) => {
+        if (err?.response.status === 422) {
+          setErrors(err.response.data.errors);
+        }
+    })
+  }
 
-                <p className='text-danger'>
-                    {errors.validationErrors.title}
-                </p>
+  return (
+    <Modal isOpen={showEditModal}>
+      <ModalHeader>Edit question</ModalHeader>
+      <ModalBody>
+        <form>
+          <TextArea
+            control={control}
+            label="Question:"
+            name="title"
+          />
+          <p className='text-danger'> {errors.title} </p>
 
-                <FormGroup>
-                    <Label for="solution">Eloquent Solution</Label>
-                    <Input id="solution" name="solution"
-                           type="textarea"
-                           value={state.solution}
-                           onChange={handleEditOnChange}
-                    />
-                </FormGroup>
+          <TextArea
+            control={control}
+            name="solution"
+            label="Solution:"
+          />
+          <p className='text-danger'> {errors.solution} </p>
 
-                <p className='text-danger'>
-                    {errors.validationErrors.solution}
-                </p>
-
-            </ModalBody>
-            <ModalFooter>
-                <Button color="primary" onClick={handleSubmit}>Edit question</Button>
-                <Button color="secondary" onClick={close}>Cancel</Button>
-            </ModalFooter>
-        </Modal>
-    )
+        </form>
+      </ModalBody>
+      <ModalFooter>
+        <Button type="submit" color="primary" onClick={handleSubmit(onSubmit)}>Edit question</Button>
+        <Button color="secondary" onClick={() => setShowEditModal(false)}>Cancel</Button>
+      </ModalFooter>
+    </Modal>
+  )
 }
 
 export default EditQuestionModal;

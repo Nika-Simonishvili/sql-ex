@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\QuestionRequest;
+use App\Http\Requests\questions\DeleteQuestionRequest;
+use App\Http\Requests\questions\StoreQuestionRequest;
+use App\Http\Requests\questions\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 use App\Models\Solution;
@@ -13,6 +15,11 @@ use function response;
 
 class QuestionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,7 +36,7 @@ class QuestionsController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return string
      */
-    public function store(QuestionRequest $request)
+    public function store(StoreQuestionRequest $request)
     {
         $question = Question::create([
             'title' => $request->input('title'),
@@ -49,9 +56,8 @@ class QuestionsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Question $question)
     {
-        $question = new QuestionResource(Question::findOrFail($id));
         $solution = Solution::where('question_id', $question->id)->value('solution');
 
         $result = "App\\Models\\" . $solution;
@@ -59,10 +65,23 @@ class QuestionsController extends Controller
 
         return response(
             [
-                'question' => $question,
+                'question' =>  new QuestionResource(Question::findOrFail($question->id)),
                 'data' => $data,
             ]
         );
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $question = Question::findOrFail($id);
+
+        return response([
+            'question' => ['title' => $question->title, 'solution' => Solution::where('question_id', $question->id)->value('solution')],
+        ]);
     }
 
     /**
@@ -72,22 +91,18 @@ class QuestionsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(QuestionRequest $request, $id)
+    public function update(UpdateQuestionRequest $request, Question $question)
     {
-        $question = Question::findOrFail($id);
-        $solution = Solution::where('question_id', $question->id)->first();
+        $solution = $question->solutions()->where('user_id', Auth::id())->first();
 
-        if ($solution->user_id == Auth::id()) {
-            $question->update([
-                'title' => $request->input('title'),
-            ]);
-            $solution->update([
-                'solution' => $request->input('solution'),
-            ]);
-            return response(['message' => 'Updated successfully']);
-        }
+        $question->update([
+            'title' => $request->input('title'),
+        ]);
+        $solution->update([
+            'solution' => $request->input('solution'),
+        ]);
 
-        return response(['server_error' => 'Solution is not yours!'], 403);
+        return response(['message' => 'Updated successfully']);
     }
 
     /**
@@ -96,16 +111,9 @@ class QuestionsController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(DeleteQuestionRequest $request, Question $question)
     {
-        $question = Question::findOrFail($id);
-        $solution = Solution::where('question_id', $question->id)->first();
-
-        if ($solution->user_id == Auth::id()) {
-            $question->delete();    //also deletes question's solutions
-            return response(['message' => 'Question deleted']);
-        }
-
-        return response(['message' => 'Solution is not yours!'], 403);
+        $question->delete();    //also deletes question's solutions
+        return response(['message' => 'Question deleted']);
     }
 }

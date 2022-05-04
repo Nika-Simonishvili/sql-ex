@@ -24,11 +24,4 @@ Route::controller(AuthController::class)->group( function () {
 });
 
 //question's protected routes
-Route::middleware('auth:sanctum')->controller(QuestionsController::class)->group( function() {
-    Route::post('questions', 'store');
-    Route::put('questions/{id}', 'update');
-    Route::delete('questions/{id}',  'destroy');
-});
-
-Route::get('questions', [QuestionsController::class, 'index']);
-Route::get('questions/{id}', [QuestionsController::class, 'show']);
+Route::apiResource('/questions', QuestionsController::class);
