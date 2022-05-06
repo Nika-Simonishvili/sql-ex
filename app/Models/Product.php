@@ -12,6 +12,9 @@ class Product extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'model';
+    public $incrementing = false;
+
     protected $fillable = ['maker', 'model', 'type'];
 
     public $timestamps = false;

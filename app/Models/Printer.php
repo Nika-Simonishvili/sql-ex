@@ -9,6 +9,9 @@ class Printer extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = ['code'];
+    public $incrementing = false;
+
     protected $filalble = ['code', 'model', 'color', 'type', 'price'];
 
     public $timestamps = false;

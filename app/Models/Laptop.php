@@ -9,6 +9,9 @@ class Laptop extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = ['code'];
+    public $incrementing = false;
+
     protected $fillable = ['code', 'model', 'speed', 'ram', 'hd', 'price', 'speed'];
 
     public $timestamps = false;

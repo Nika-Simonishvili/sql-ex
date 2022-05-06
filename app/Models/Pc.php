@@ -9,6 +9,9 @@ class Pc extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = ['code'];
+    public $incrementing = false;
+
     protected $fillable = ['code', 'model', 'speed', 'ram', 'hd', 'cd', 'price'];
 
     public $timestamps = false;
