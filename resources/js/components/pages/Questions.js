@@ -86,8 +86,7 @@ function Questions() {
             Add question
           </Button>
         </>
-      )
-      }
+      )}
 
       <h4 className='text-danger'>
         {errors.serverErrors}
